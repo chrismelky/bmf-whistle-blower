@@ -1,0 +1,57 @@
+
+entity Category(categories) {
+  code String
+  name String
+}
+
+
+entity Complain(complains) {
+  name String 
+  position String
+  organisation String
+  email String
+  phoneNumber String
+  controlNumber String required
+  description TextBlob
+}
+
+
+entity Suspect(suspects) {
+  name String required
+  position String
+  organisation String
+  email String
+  phoneNumber String
+}
+
+entity Witness(witnesses) {
+  name String required
+  position String
+  organisation String
+  email String
+  phoneNumber String
+}
+
+entity Attachment(attachements) {
+  name String 
+  contentId String
+  contentLength Long
+  mimeType String
+}
+
+relationship ManyToOne {
+  Complain{category(name) required} to Category
+}
+
+relationship ManyToMany {
+  Complain{witnesses} to Witness
+  Complain{suspects} to Suspect
+  Complain{attachments} to Attachment
+  Complain{receivers} to User
+}
+
+skipClient Attachment, Witness, Suspect
+paginate Complain with pagination
+filter Complain
+
+
