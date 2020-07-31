@@ -43,15 +43,17 @@ relationship ManyToOne {
   Complain{category(name) required} to Category
 }
 
-relationship ManyToMany {
-  Complain{witnesses} to Witness
-  Complain{suspects} to Suspect
-  Complain{attachments} to Attachment
-  Complain{receivers} to User
+relationship OneToMany {
+  Complain{witnesses} to Witness{complain required}
+  Complain{suspects} to Suspect{complain required}
+  Complain{attachments} to Attachment{complain required}
 }
 
-skipClient Attachment, Witness, Suspect
+relationship ManyToMany {
+  Complain{receivers} to User
+}
 paginate Complain with pagination
+dto all with mapstruct
 filter Complain
 
 

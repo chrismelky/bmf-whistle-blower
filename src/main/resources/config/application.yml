@@ -122,6 +122,13 @@ spring:
             client-id: web_app
             client-secret: web_app
 
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  content:
+    fs:
+      filesystem-root: /Users/amtz/Documents/files
+
 server:
   servlet:
     session:

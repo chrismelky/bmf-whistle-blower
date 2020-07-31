@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="notification">
+            <h2><span jhiTranslate="whistleBlowerApp.notification.detail.title">Notification</span> {{ notification.id }}</h2>
+
+            <hr>
+
+            <bmf-alert-error></bmf-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="whistleBlowerApp.notification.subject">Subject</span></dt>
+                <dd>
+                    <span>{{ notification.subject }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.notification.email">Email</span></dt>
+                <dd>
+                    <span>{{ notification.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.notification.isSent">Is Sent</span></dt>
+                <dd>
+                    <span>{{ notification.isSent }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.notification.ignore">Ignore</span></dt>
+                <dd>
+                    <span>{{ notification.ignore }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.notification.user">User</span></dt>
+                <dd>
+                    {{ notification.userLogin }}
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.notification.complain">Complain</span></dt>
+                <dd>
+                    <div *ngIf="notification.complainId">
+                        <a [routerLink]="['/complain', notification.complainId, 'view']">{{ notification.complainDescription }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+        </div>
+    </div>
+</div>

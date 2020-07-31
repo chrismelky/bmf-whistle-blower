@@ -48,6 +48,16 @@ public class CacheConfiguration {
             createCache(cm, tz.or.mkapafoundation.whistleblower.domain.User.class.getName());
             createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Authority.class.getName());
             createCache(cm, tz.or.mkapafoundation.whistleblower.domain.User.class.getName() + ".authorities");
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Category.class.getName());
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Complain.class.getName());
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Complain.class.getName() + ".witnesses");
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Complain.class.getName() + ".suspects");
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Complain.class.getName() + ".attachments");
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Complain.class.getName() + ".receivers");
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Suspect.class.getName());
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Witness.class.getName());
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Attachment.class.getName());
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Notification.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

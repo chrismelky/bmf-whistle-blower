@@ -1,0 +1,50 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "user",
+      "otherEntityName": "user",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "login",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "notification"
+    },
+    {
+      "relationshipName": "complain",
+      "otherEntityName": "complain",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "description",
+      "otherEntityRelationshipName": "notification"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "subject",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isSent",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "ignore",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20200731105146",
+  "dto": "mapstruct",
+  "searchEngine": false,
+  "service": "serviceClass",
+  "entityTableName": "notification",
+  "databaseType": "sql",
+  "readOnly": true,
+  "jpaMetamodelFiltering": false,
+  "pagination": "pagination"
+}

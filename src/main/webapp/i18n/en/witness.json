@@ -1,0 +1,27 @@
+{
+  "whistleBlowerApp": {
+    "witness": {
+      "home": {
+        "title": "Witnesses",
+        "createLabel": "Create a new Witness",
+        "createOrEditLabel": "Create or edit a Witness",
+        "notFound": "No Witnesses found"
+      },
+      "created": "A new Witness is created with identifier {{ param }}",
+      "updated": "A Witness is updated with identifier {{ param }}",
+      "deleted": "A Witness is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Witness {{ id }}?"
+      },
+      "detail": {
+        "title": "Witness"
+      },
+      "name": "Name",
+      "position": "Position",
+      "organisation": "Organisation",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "complain": "Complain"
+    }
+  }
+}

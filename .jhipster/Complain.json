@@ -1,0 +1,82 @@
+{
+  "name": "Complain",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "position",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organisation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "controlNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "witness",
+      "otherEntityRelationshipName": "complain",
+      "relationshipName": "witnesses"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "suspect",
+      "otherEntityRelationshipName": "complain",
+      "relationshipName": "suspects"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "attachment",
+      "otherEntityRelationshipName": "complain",
+      "relationshipName": "attachments"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "complain",
+      "relationshipValidateRules": "required",
+      "relationshipName": "category",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "complain",
+      "relationshipName": "receivers",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200728113733",
+  "entityTableName": "complains",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

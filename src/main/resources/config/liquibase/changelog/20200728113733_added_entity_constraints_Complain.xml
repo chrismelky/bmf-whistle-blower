@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Complain.
+    -->
+    <changeSet id="20200728113733-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="complains"
+                                 constraintName="fk_complains_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="categories"/>
+
+        <addForeignKeyConstraint baseColumnNames="complain_id"
+                                 baseTableName="complains_receivers"
+                                 constraintName="fk_complains_receivers_complains_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="complains"/>
+
+        <addForeignKeyConstraint baseColumnNames="receivers_id"
+                                 baseTableName="complains_receivers"
+                                 constraintName="fk_complains_receivers_receivers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bmf_user"/>
+        
+    </changeSet>
+</databaseChangeLog>

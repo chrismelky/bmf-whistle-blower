@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="complain">
+            <h2><span jhiTranslate="whistleBlowerApp.complain.detail.title">Complain</span> {{ complain.id }}</h2>
+
+            <hr>
+
+            <bmf-alert-error></bmf-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="whistleBlowerApp.complain.name">Name</span></dt>
+                <dd>
+                    <span>{{ complain.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.complain.position">Position</span></dt>
+                <dd>
+                    <span>{{ complain.position }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span></dt>
+                <dd>
+                    <span>{{ complain.organisation }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.complain.email">Email</span></dt>
+                <dd>
+                    <span>{{ complain.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ complain.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.complain.controlNumber">Control Number</span></dt>
+                <dd>
+                    <span>{{ complain.controlNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.complain.description">Description</span></dt>
+                <dd>
+                    <span>{{ complain.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.complain.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="complain.categoryId">
+                        <a [routerLink]="['/category', complain.categoryId, 'view']">{{ complain.categoryName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="whistleBlowerApp.complain.receivers">Receivers</span></dt>
+                <dd>
+                    <span *ngFor="let receivers of complain.receivers; let last = last">
+                        {{ receivers.id }}{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/complain', complain.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

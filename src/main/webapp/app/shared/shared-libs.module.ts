@@ -7,7 +7,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   exports: [
     ReactiveFormsModule,

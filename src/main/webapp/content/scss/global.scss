@@ -6,14 +6,24 @@
 Bootstrap tweaks
 ===============================================================*/
 
-body,
+body {
+  font-weight: 300;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
 h1,
 h2,
 h3,
 h4 {
-  font-weight: 300;
+  // font-family: 'Google Sans',Roboto,Arial,sans-serif;
+  // font-size: 1.75rem !important;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 2.25rem;
 }
-
+.spacer {
+  flex: 1 1 auto;
+}
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
 a {
   color: #533f03;
@@ -56,16 +66,6 @@ Browser Upgrade Prompt
 /* ==========================================================================
 Generic styles
 ========================================================================== */
-
-/* Error highlight on input fields */
-.ng-valid[required],
-.ng-valid.required {
-  border-left: 5px solid green;
-}
-
-.ng-invalid:not(form) {
-  border-left: 5px solid red;
-}
 
 /* other generic styles */
 
@@ -192,4 +192,16 @@ ui bootstrap tweaks
   white-space: nowrap;
 }
 
+.full-width {
+  width: 100% !important;
+}
+
+.mat-horizontal-content-container {
+  overflow: hidden;
+  padding: 24px 24px 24px 24px !important;
+}
+
+.mat-step-header .mat-step-icon-selected {
+  background-color: green;
+}
 /* jhipster-needle-scss-add-main JHipster will add new css style */

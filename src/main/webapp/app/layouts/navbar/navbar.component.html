@@ -1,7 +1,32 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-dark">
+<mat-toolbar color="primary">
+    <a  routerLink="/" (click)="collapseNavbar()" style="color: white;">
+        <span class="logo-img"></span>
+        <span>Whistle Blower</span>
+        <span class="navbar-version">{{ version }}</span>
+    </a>
+    <span class="spacer"></span>
+    <button type="button" mat-button routerLink="/">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+    </button>
+    <button type="button" mat-button routerLink="/" *ngIf="false">
+        <mat-icon>campaign</mat-icon>
+        <span [matBadge]="2" [matBadgeColor]="'accent'" matBadgeOverlap="false">Complains</span>
+    </button>
+    <button type="button" mat-button >
+        <mat-icon>apps</mat-icon>
+        <span>Applications</span>
+    </button>
+    <button type="button" mat-button >
+        <mat-icon>person</mat-icon>
+        <span>Account</span>
+    </button>
+</mat-toolbar>
+<nav class="navbar navbar-white navbar-expand-md bg-white" *ngIf="false">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img"></span>
-        <span jhiTranslate="global.title" class="navbar-title">WhistleBlower</span> <span class="navbar-version">{{ version }}</span>
+        <span class="navbar-title">
+            <span style="color: #3f51b5;">Whistle</span><span style="color: green;"> Blower</span></span> <span class="navbar-version">{{ version }}</span>
     </a>
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
@@ -12,7 +37,7 @@
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
                         <fa-icon icon="home"></fa-icon>
-                        <span jhiTranslate="global.menu.home">Home</span>
+                        <span jhiTranslate="global.menu.home">Home </span>
                     </span>
                 </a>
             </li>
@@ -27,6 +52,42 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+                    <li>
+                        <a class="dropdown-item" routerLink="category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.category">Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="complain" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.complain">Complain</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="suspect" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.suspect">Suspect</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="witness" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.witness">Witness</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="attachment" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.attachment">Attachment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="notification" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.notification">Notification</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
