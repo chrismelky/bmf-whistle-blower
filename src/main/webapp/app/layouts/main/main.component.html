@@ -1,13 +1,62 @@
 <!-- <bmf-page-ribbon></bmf-page-ribbon> -->
+<mat-drawer-container>
+    <mat-drawer #drawer [mode]="'side'" style="width: 200px;">
+        <mat-toolbar color="primary">
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="drawer.toggle()" >
+                <mat-icon *ngIf="drawer.opened">clear</mat-icon>
+            </button>
+        </mat-toolbar>
+        <mat-nav-list style="padding:20px 20px 0 0">
+            <mat-list-item routerLink="/category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <mat-icon>category</mat-icon>
+                <span>Categories</span>
+            </mat-list-item>
+            <mat-list-item routerLink="/complain" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <mat-icon>campaign</mat-icon>
+                <span>Complians</span>
+            </mat-list-item>
 
-<div>
-    <router-outlet name="navbar"></router-outlet>
-</div>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div>
+            <mat-toolbar color="primary">
+                <button mat-icon-button (click)="drawer.toggle()" *ngIf="!drawer.opened">
+                    <mat-icon >menu</mat-icon>
+                </button>
+                <a routerLink="/" style="color: white;">
+                    <span class="logo-img"></span>
+                    <span>Whistle Blower</span>
+                    <!-- <span class="navbar-version">{{ version }}</span> -->
+                </a>
+                <span class="spacer"></span>
+                <button type="button" mat-button routerLink="/">
+                    <mat-icon>home</mat-icon>
+                    <span>Home</span>
+                </button>
+                <button type="button" mat-button routerLink="/" *ngIf="false">
+                    <mat-icon>campaign</mat-icon>
+                    <span [matBadge]="2" [matBadgeColor]="'accent'" matBadgeOverlap="false">Complains</span>
+                </button>
+                <button type="button" mat-button>
+                    <mat-icon>apps</mat-icon>
+                    <span>Applications</span>
+                </button>
+                <button type="button" mat-button>
+                    <mat-icon>person</mat-icon>
+                    <span>Account</span>
+                </button>
+            </mat-toolbar>
+            <!-- <router-outlet name="navbar"></router-outlet> -->
+        </div>
 
-<div class="container-fluid">
-    <div class="card jh-card">
-        <router-outlet></router-outlet>
-    </div>
+        <div class="container-fluid">
+            <div class="card jh-card">
+                <router-outlet></router-outlet>
+            </div>
 
-    <bmf-footer></bmf-footer>
-</div>
+            <bmf-footer></bmf-footer>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

@@ -8,6 +8,7 @@ import { ComplainUpdateComponent } from './complain-update.component';
 import { ComplainDeleteDialogComponent } from './complain-delete-dialog.component';
 import { complainRoute } from './complain.route';
 import { AttachmentUpdateComponent } from './attachment-dialog.component';
+import { CommentComponent } from './comment.component';
 
 @NgModule({
   imports: [WhistleBlowerSharedModule, RouterModule.forChild(complainRoute)],
@@ -17,6 +18,7 @@ import { AttachmentUpdateComponent } from './attachment-dialog.component';
     ComplainUpdateComponent,
     ComplainDeleteDialogComponent,
     AttachmentUpdateComponent,
+    CommentComponent,
   ],
   entryComponents: [ComplainDeleteDialogComponent],
 })

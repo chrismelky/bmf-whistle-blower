@@ -1,27 +1,4 @@
-<mat-toolbar color="primary">
-    <a  routerLink="/" (click)="collapseNavbar()" style="color: white;">
-        <span class="logo-img"></span>
-        <span>Whistle Blower</span>
-        <span class="navbar-version">{{ version }}</span>
-    </a>
-    <span class="spacer"></span>
-    <button type="button" mat-button routerLink="/">
-        <mat-icon>home</mat-icon>
-        <span>Home</span>
-    </button>
-    <button type="button" mat-button routerLink="/" *ngIf="false">
-        <mat-icon>campaign</mat-icon>
-        <span [matBadge]="2" [matBadgeColor]="'accent'" matBadgeOverlap="false">Complains</span>
-    </button>
-    <button type="button" mat-button >
-        <mat-icon>apps</mat-icon>
-        <span>Applications</span>
-    </button>
-    <button type="button" mat-button >
-        <mat-icon>person</mat-icon>
-        <span>Account</span>
-    </button>
-</mat-toolbar>
+
 <nav class="navbar navbar-white navbar-expand-md bg-white" *ngIf="false">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img"></span>

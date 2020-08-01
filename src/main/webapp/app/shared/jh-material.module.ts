@@ -16,6 +16,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 @NgModule({
   exports: [
@@ -35,6 +39,10 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatSelectModule,
     MatDialogModule,
     MatBadgeModule,
+    MatSidenavModule,
+    MatExpansionModule,
+    MatChipsModule,
+    MatBottomSheetModule,
   ],
 })
 export class JhMaterialModule {}

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { IComplain } from 'app/shared/model/complain.model';
+import { CommentComponent } from './comment.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'bmf-complain-detail',
@@ -11,7 +13,7 @@ import { IComplain } from 'app/shared/model/complain.model';
 export class ComplainDetailComponent implements OnInit {
   complain: IComplain | null = null;
 
-  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute, private commentDialog: MatBottomSheet) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ complain }) => (this.complain = complain));
@@ -27,5 +29,11 @@ export class ComplainDetailComponent implements OnInit {
 
   previousState(): void {
     window.history.back();
+  }
+
+  addComment(): void {
+    const commentRef = this.commentDialog.open(CommentComponent);
+
+    commentRef.afterDismissed().subscribe(() => {});
   }
 }

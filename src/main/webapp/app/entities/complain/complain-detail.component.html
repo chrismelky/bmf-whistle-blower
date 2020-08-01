@@ -1,65 +1,47 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="complain">
-            <h2><span jhiTranslate="whistleBlowerApp.complain.detail.title">Complain</span> {{ complain.id }}</h2>
-
-            <hr>
-
-            <bmf-alert-error></bmf-alert-error>
-
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="whistleBlowerApp.complain.name">Name</span></dt>
-                <dd>
-                    <span>{{ complain.name }}</span>
-                </dd>
-                <dt><span jhiTranslate="whistleBlowerApp.complain.position">Position</span></dt>
-                <dd>
-                    <span>{{ complain.position }}</span>
-                </dd>
-                <dt><span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span></dt>
-                <dd>
-                    <span>{{ complain.organisation }}</span>
-                </dd>
-                <dt><span jhiTranslate="whistleBlowerApp.complain.email">Email</span></dt>
-                <dd>
-                    <span>{{ complain.email }}</span>
-                </dd>
-                <dt><span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span></dt>
-                <dd>
-                    <span>{{ complain.phoneNumber }}</span>
-                </dd>
-                <dt><span jhiTranslate="whistleBlowerApp.complain.controlNumber">Control Number</span></dt>
-                <dd>
-                    <span>{{ complain.controlNumber }}</span>
-                </dd>
-                <dt><span jhiTranslate="whistleBlowerApp.complain.description">Description</span></dt>
-                <dd>
-                    <span>{{ complain.description }}</span>
-                </dd>
-                <dt><span jhiTranslate="whistleBlowerApp.complain.category">Category</span></dt>
-                <dd>
-                    <div *ngIf="complain.categoryId">
-                        <a [routerLink]="['/category', complain.categoryId, 'view']">{{ complain.categoryName }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="whistleBlowerApp.complain.receivers">Receivers</span></dt>
-                <dd>
-                    <span *ngFor="let receivers of complain.receivers; let last = last">
-                        {{ receivers.id }}{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/complain', complain.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+<div fxLayout="row" style="width: 100%;">
+    <div fxFlex="60%" style="border-right: 1px solid rgba(0, 0, 0, 0.12);padding:10px">
+        <mat-chip-list>
+            <mat-chip color="accent">
+                {{complain?.categoryName}}
+            </mat-chip>
+        </mat-chip-list>
+        <br/>
+        <div fxLayout="row" fxLayoutGap="5px">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Name</mat-label>
+                <input disabled matInput [value]="complain?.name || 'Anonimous'" />
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Position</mat-label>
+                <input disabled matInput [value]="complain?.position" />
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Organisation</mat-label>
+                <input disabled matInput [value]="complain?.organisation" />
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="5px">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input disabled matInput [value]="complain?.email" />
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input disabled matInput [value]="complain?.phoneNumber" />
+            </mat-form-field>
+        </div>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea disabled matInput [value]="complain?.description"></textarea>
+        </mat-form-field>
+    </div>
+    <div fxFlex="40%" style="padding: 10px;">
+        <div fxLayout="row" style="width: 100%;">
+            <mat-label>Comments</mat-label>
+            <span class="spacer"></span>
+            <button mat-button color="primary" (click)="addComment()">
+                <mat-icon>add_comment</mat-icon>
+                <span>Add Comments</span>
             </button>
         </div>
     </div>

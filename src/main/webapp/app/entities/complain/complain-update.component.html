@@ -7,8 +7,8 @@
             <bmf-alert-error></bmf-alert-error>
         </div>
         <form [formGroup]="complainForm" (ngSubmit)="save()">
-            <mat-horizontal-stepper [linear]="false" #stepper>
-                <mat-step>
+            <mat-horizontal-stepper [linear]="true" #stepper>
+                <mat-step [stepControl]="complainForm.get('categoryId')! && complainForm.get('description')!">
                     <ng-template matStepLabel>Complain Information</ng-template>
                     <div fxLayout="row">
                         <div fxFlex fxLayout="column">
@@ -43,28 +43,29 @@
                                 style="border: 1px solid rgba(0,0,0,.12); border-radius: 8px;; padding: .75em;">
                                 <mat-list fxFlex>
                                     <div mat-subheader>
-                                        <button (click)="openAttachementDialog()" color="primary" type="button" mat-button>
-                                            <mat-icon color="primary" >add</mat-icon>
+                                        <button (click)="openAttachementDialog()" color="primary" type="button"
+                                            mat-button>
+                                            <mat-icon color="primary">add</mat-icon>
                                             <span>Add Attachment</span>
                                         </button>
                                     </div>
-                                    <mat-list-item formArrayName="attachments" *ngFor="let s of attachments.controls; let i= index">
+                                    <mat-list-item formArrayName="attachments"
+                                        *ngFor="let s of attachments.controls; let i= index">
                                         <button type="button" mat-icon-button (click)="removeAttachment(i)">
-                                            <mat-icon color="warn"  >delete</mat-icon>
+                                            <mat-icon color="warn">delete</mat-icon>
                                         </button>
                                         <div mat-line>
-                                            <a target="_blanck" [href]="downloadUrl+'/'+s.value?.contentId">{{s.value?.name || s.value?.contentId}}</a>
+                                            <a target="_blanck"
+                                                [href]="downloadUrl+'/'+s.value?.contentId">{{s.value?.name || s.value?.contentId}}</a>
                                         </div>
                                         <div mat-line> Type: {{s.value?.mimeType}}</div>
-                                      </mat-list-item>
-                                    
+                                    </mat-list-item>
+
                                 </mat-list>
                             </div>
                         </div>
-
                     </div>
-
-                    <div style="margin-top: 20px;">
+                    <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 10px;">
                         <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
@@ -76,19 +77,19 @@
                                 <mat-label>
                                     <span jhiTranslate="whistleBlowerApp.complain.name">Name</span>
                                 </mat-label>
-                                <input matInput type="text"  formControlName="name" />
+                                <input matInput type="text" formControlName="name" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
                                     <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
                                 </mat-label>
-                                <input matInput type="text"  formControlName="position" />
+                                <input matInput type="text" formControlName="position" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
                                     <span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
                                 </mat-label>
-                                <input matInput type="text"  formControlName="organisation" />
+                                <input matInput type="text" formControlName="organisation" />
                             </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayoutGap="10px">
@@ -107,113 +108,120 @@
                         </div>
 
                     </div>
-                    <div>
-                        <button color="primary" type="button" mat-raised-button matStepperNext>Next</button>
+                    <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
+                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="suspects">
                     <ng-template matStepLabel>Suspects</ng-template>
-                    <button type="button" mat-button (click)="addSuspect()">Add</button>
+                    <button type="button" mat-button (click)="addSuspect()" color="primary" style="margin-bottom: 20px;">
+                        <mat-icon color="primary">add</mat-icon>
+                        <span>Add Suspect</span>
+                    </button>
                     <div formArrayName="suspects" *ngFor="let s of suspects.controls; let i= index">
-                        <div [formGroupName]="i" fxLayout="row">
+                        <div [formGroupName]="i" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
                             <div>
                                 {{i+1}}
                             </div>
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.name"
-                                    for="field_name">Name</label>
-                                <input type="text" class="form-control" name="name" id="field_name"
-                                    formControlName="name" />
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.position"
-                                    for="field_position">Position</label>
-                                <input type="text" class="form-control" name="position" id="field_position"
-                                    formControlName="position" />
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.organisation"
-                                    for="field_organisation">Organisation</label>
-                                <input type="text" class="form-control" name="organisation" id="field_organisation"
-                                    formControlName="organisation" />
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.email"
-                                    for="field_email">Email</label>
-                                <input type="text" class="form-control" name="email" id="field_email"
-                                    formControlName="email" />
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.phoneNumber"
-                                    for="field_phoneNumber">Phone Number</label>
-                                <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber"
-                                    formControlName="phoneNumber" />
-                            </div>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.name">Name</span>
+                                </mat-label>
+                                <input matInput formControlName="name" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                </mat-label>
+                                <input matInput formControlName="position" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jjhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                </mat-label>
+                                <input matInput formControlName="organisation" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                </mat-label>
+                                <input matInput formControlName="email" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                </mat-label>
+                                <input matInput formControlName="phoneNumber" />
+                            </mat-form-field>
+                            <button type="button" mat-icon-button (click)="removeSuspect(i)">
+                                <mat-icon color="warn">delete</mat-icon>
+                            </button>
                         </div>
-                        <mat-divider></mat-divider>
                     </div>
-                    <div>
-                        <button type="button" mat-button matStepperNext>Next</button>
+                    <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
+                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="witnesses">
                     <ng-template matStepLabel>Witnesses</ng-template>
-                    <button type="button" mat-raised-button (click)="addWitness()">Add Witness</button>
+                    <button type="button" color="primary" mat-button (click)="addWitness()" style="margin-bottom: 20px;">
+                        <mat-icon>add</mat-icon>
+                        <span>Add Witness</span>
+                    </button>
                     <div formArrayName="witnesses" *ngFor="let s of witnesses.controls; let i= index">
-                        <div [formGroupName]="i" fxLayout="row">
+                        <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                             <div>
                                 {{i+1}}
                             </div>
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.name"
-                                    for="field_name">Name</label>
-                                <input type="text" class="form-control" name="name" id="field_name"
-                                    formControlName="name" />
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.position"
-                                    for="field_position">Position</label>
-                                <input type="text" class="form-control" name="position" id="field_position"
-                                    formControlName="position" />
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.organisation"
-                                    for="field_organisation">Organisation</label>
-                                <input type="text" class="form-control" name="organisation" id="field_organisation"
-                                    formControlName="organisation" />
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.email"
-                                    for="field_email">Email</label>
-                                <input type="text" class="form-control" name="email" id="field_email"
-                                    formControlName="email" />
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" jhiTranslate="whistleBlowerApp.complain.phoneNumber"
-                                    for="field_phoneNumber">Phone Number</label>
-                                <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber"
-                                    formControlName="phoneNumber" />
-                            </div>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.name">Name</span>
+                                </mat-label>
+                                <input matInput formControlName="name" required />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                </mat-label>
+                                <input matInput formControlName="position" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                </mat-label>
+                                <input matInput formControlName="organisation" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                </mat-label>
+                                <input matInput formControlName="email" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                </mat-label>
+                                <input matInput formControlName="phoneNumber" />
+                            </mat-form-field>
+                            <button type="button" mat-icon-button (click)="removeWitness(i)">
+                                <mat-icon color="warn">delete</mat-icon>
+                            </button>
                         </div>
                     </div>
-                    <div>
-                        <button type="button" mat-button matStepperNext>Next</button>
+                    <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
+                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
                 <mat-step>
                     <ng-template matStepLabel>Confirmation</ng-template>
-                    <button type="submit" id="save-entity" [disabled]="complainForm.invalid || isSaving"
-                        class="btn btn-primary">
-                        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                    <button type="submit" mat-raised-button color="primary" [disabled]="complainForm.invalid || isSaving">
+                        <mat-icon>save</mat-icon><span>Submit</span>
                     </button>
+                </div>
                 </mat-step>
             </mat-horizontal-stepper>
         </form>

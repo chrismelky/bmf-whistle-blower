@@ -24,6 +24,9 @@ h4 {
 .spacer {
   flex: 1 1 auto;
 }
+button {
+  outline: none !important;
+}
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
 a {
   color: #533f03;
