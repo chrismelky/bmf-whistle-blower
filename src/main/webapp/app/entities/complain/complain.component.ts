@@ -10,6 +10,7 @@ import { IComplain } from 'app/shared/model/complain.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ComplainService } from './complain.service';
 import { ComplainDeleteDialogComponent } from './complain-delete-dialog.component';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'bmf-complain',
@@ -24,6 +25,7 @@ export class ComplainComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   constructor(
     protected complainService: ComplainService,
@@ -31,14 +33,21 @@ export class ComplainComponent implements OnInit, OnDestroy {
     protected dataUtils: JhiDataUtils,
     protected router: Router,
     protected eventManager: JhiEventManager,
+    protected localStorage: LocalStorageService,
     protected modalService: NgbModal
-  ) {}
+  ) {
+    this.account = localStorage.retrieve('user');
+  }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
+    if (this.account == null) {
+      return;
+    }
     const pageToLoad: number = page || this.page || 1;
 
     this.complainService
       .query({
+        'receiversId.equals': this.account.id,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),

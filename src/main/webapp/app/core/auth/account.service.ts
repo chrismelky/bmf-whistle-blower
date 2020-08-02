@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { JhiLanguageService } from 'ng-jhipster';
-import { SessionStorageService } from 'ngx-webstorage';
+import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 import { Observable, ReplaySubject, of } from 'rxjs';
 import { shareReplay, tap, catchError } from 'rxjs/operators';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
@@ -19,6 +19,7 @@ export class AccountService {
   constructor(
     private languageService: JhiLanguageService,
     private sessionStorage: SessionStorageService,
+    private localStorage: LocalStorageService,
     private http: HttpClient,
     private stateStorageService: StateStorageService,
     private router: Router
@@ -47,6 +48,7 @@ export class AccountService {
         }),
         tap((account: Account | null) => {
           this.authenticate(account);
+          this.localStorage.store('user', account);
 
           // After retrieve the account info, the language will be changed to
           // the user's preferred language configured in the account setting

@@ -4,6 +4,9 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
+import { LoginService } from 'app/core/login/login.service';
+import { LocalStorageService } from 'ngx-webstorage';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'bmf-main',
@@ -11,20 +14,25 @@ import { AccountService } from 'app/core/auth/account.service';
 })
 export class MainComponent implements OnInit {
   private renderer: Renderer2;
+  account: Account | null = null;
 
   constructor(
     private accountService: AccountService,
     private titleService: Title,
     private router: Router,
     private translateService: TranslateService,
-    rootRenderer: RendererFactory2
+    private localStorage: LocalStorageService,
+    rootRenderer: RendererFactory2,
+    private loginService: LoginService
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
   }
 
   ngOnInit(): void {
     // try to log in automatically
-    this.accountService.identity().subscribe();
+    this.accountService.identity().subscribe(res => {
+      this.account = res || null;
+    });
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -56,5 +64,18 @@ export class MainComponent implements OnInit {
       pageTitle = 'global.title';
     }
     this.translateService.get(pageTitle).subscribe(title => this.titleService.setTitle(title));
+  }
+
+  isAuthenticated(): boolean {
+    return this.accountService.isAuthenticated();
+  }
+
+  login(): void {
+    this.loginService.login();
+  }
+
+  logout(): void {
+    this.loginService.logout();
+    this.router.navigate(['']);
   }
 }

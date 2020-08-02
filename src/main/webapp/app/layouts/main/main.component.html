@@ -1,6 +1,6 @@
 <!-- <bmf-page-ribbon></bmf-page-ribbon> -->
 <mat-drawer-container>
-    <mat-drawer #drawer [mode]="'side'" style="width: 200px;">
+    <mat-drawer #drawer [mode]="'side'" style="width: 200px;" >
         <mat-toolbar color="primary">
             <span class="spacer"></span>
             <button mat-icon-button (click)="drawer.toggle()" >
@@ -8,11 +8,11 @@
             </button>
         </mat-toolbar>
         <mat-nav-list style="padding:20px 20px 0 0">
-            <mat-list-item routerLink="/category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-list-item *bmfHasAnyAuthority="'ROLE_ADMIN'" routerLink="/category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon>category</mat-icon>
                 <span>Categories</span>
             </mat-list-item>
-            <mat-list-item routerLink="/complain" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-list-item *bmfHasAnyAuthority="'ROLE_ADMIN'" routerLink="/complain" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon>campaign</mat-icon>
                 <span>Complians</span>
             </mat-list-item>
@@ -22,7 +22,7 @@
     <mat-drawer-content>
         <div>
             <mat-toolbar color="primary">
-                <button mat-icon-button (click)="drawer.toggle()" *ngIf="!drawer.opened">
+                <button mat-icon-button (click)="drawer.toggle()" *ngIf="drawer?.opened === false && isAuthenticated()">
                     <mat-icon >menu</mat-icon>
                 </button>
                 <a routerLink="/" style="color: white;">
@@ -43,10 +43,21 @@
                     <mat-icon>apps</mat-icon>
                     <span>Applications</span>
                 </button>
-                <button type="button" mat-button>
+                <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()">
                     <mat-icon>person</mat-icon>
-                    <span>Account</span>
+                    <span>{{account?.firstName}} {{account?.lastName}}</span>
                 </button>
+                <mat-menu #accMenu>
+                    <button mat-menu-item (click)="logout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Logout</span>
+                    </button>
+                </mat-menu>
+                <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()">
+                    <mat-icon>login</mat-icon>
+                    <span>Sign In</span>
+                </button>
+               
             </mat-toolbar>
             <!-- <router-outlet name="navbar"></router-outlet> -->
         </div>
