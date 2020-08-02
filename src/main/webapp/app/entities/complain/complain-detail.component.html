@@ -1,39 +1,108 @@
 <div fxLayout="row" style="width: 100%;">
     <div fxFlex="60%" style="border-right: 1px solid rgba(0, 0, 0, 0.12);padding:10px">
-        <mat-chip-list>
-            <mat-chip color="accent">
-                {{complain?.categoryName}}
-            </mat-chip>
-        </mat-chip-list>
-        <br/>
-        <div fxLayout="row" fxLayoutGap="5px">
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Name</mat-label>
-                <input disabled matInput [value]="complain?.name || 'Anonimous'" />
-            </mat-form-field>
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Position</mat-label>
-                <input disabled matInput [value]="complain?.position" />
-            </mat-form-field>
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Organisation</mat-label>
-                <input disabled matInput [value]="complain?.organisation" />
-            </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayoutGap="5px">
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Email</mat-label>
-                <input disabled matInput [value]="complain?.email" />
-            </mat-form-field>
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Phone Number</mat-label>
-                <input disabled matInput [value]="complain?.phoneNumber" />
-            </mat-form-field>
-        </div>
-        <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Description</mat-label>
-            <textarea disabled matInput [value]="complain?.description"></textarea>
-        </mat-form-field>
+        <mat-accordion multi>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-chip-list>
+                        <mat-chip color="accent">
+                            {{complain?.categoryName}} Complain
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-expansion-panel-header>
+                <div fxLayout="row" fxLayoutGap="5px">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input disabled matInput [value]="complain?.name || 'Anonimous'" />
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Position</mat-label>
+                        <input disabled matInput [value]="complain?.position" />
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Organisation</mat-label>
+                        <input disabled matInput [value]="complain?.organisation" />
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="5px">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input disabled matInput [value]="complain?.email" />
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input disabled matInput [value]="complain?.phoneNumber" />
+                    </mat-form-field>
+                </div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea disabled matInput [value]="complain?.description"></textarea>
+                </mat-form-field>
+
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-icon>attachment</mat-icon>&nbsp;Attachments
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <mat-list-item *ngFor="let s of complain?.attachments;let i=index">
+                        <span fxFlex="20px">{{i+1}}</span>
+                        <a target="_blank"
+                        [href]="downloadUrl+'/'+s?.contentId">{{s?.name || s?.contentId}}</a>
+                        <mat-divider></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-icon>person</mat-icon>&nbsp;Suspects
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <mat-list-item *ngFor="let s of complain?.suspects;let i=index">
+                        <div fxLayout="row" class="full-width">
+                            <div fxFlex="20px">{{i+1}}</div>
+                            <div fxFlex>
+                                <span>{{s.name}}</span>
+                            </div>
+                            <div fxFlex>
+                                <span>{{s.organisation}}</span>
+                            </div>
+                            <div fxFlex>
+                                <span>{{s.phoneNumber}}</span>
+                            </div>
+                            <div fxFlex>
+                                <span>{{s.email}}</span>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-icon>perm_identity</mat-icon>&nbsp;Witnesses
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <mat-list-item *ngFor="let w of complain?.witnesses;let i=index">
+                        <div fxLayout="row" class="full-width">
+                            <div fxFlex="20px">{{i+1}}</div>
+                            <div fxFlex>
+                                <span>{{w.name}}</span>
+                            </div>
+                            <div fxFlex>
+                                <span>{{w.organisation}}</span>
+                            </div>
+                            <div fxFlex>
+                                <span>{{w.phoneNumber}}</span>
+                            </div>
+                            <div fxFlex>
+                                <span>{{w.email}}</span>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
+        </mat-accordion>
     </div>
     <div fxFlex="40%" style="padding: 10px;">
         <div fxLayout="row" style="width: 100%;">
@@ -43,6 +112,12 @@
                 <mat-icon>add_comment</mat-icon>
                 <span>Add Comments</span>
             </button>
+        </div>
+        <div fxLayout="column">
+            <mat-form-field class="full-width" *ngFor="let c of comments" appearance="outline">
+                <mat-label style="font-style: italic;">{{c.user}} - {{c.createdDate | date}}</mat-label>
+                <textarea style="font-size: 12px;" matInput disabled [value]="c.description" ></textarea>
+            </mat-form-field>
         </div>
     </div>
 </div>

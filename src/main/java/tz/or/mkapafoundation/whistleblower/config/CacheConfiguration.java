@@ -58,6 +58,7 @@ public class CacheConfiguration {
             createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Witness.class.getName());
             createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Attachment.class.getName());
             createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Notification.class.getName());
+            createCache(cm, tz.or.mkapafoundation.whistleblower.domain.Comment.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

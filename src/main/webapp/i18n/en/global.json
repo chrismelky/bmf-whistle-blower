@@ -13,6 +13,7 @@
         "witness": "Witness",
         "attachment": "Attachment",
         "notification": "Notification",
+        "comment": "Comment",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
