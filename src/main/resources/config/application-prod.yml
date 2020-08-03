@@ -33,7 +33,7 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/whistle_blower
+    url: jdbc:postgresql://localhost:5432/WhistleBlower
     username: postgres
     password: p@ssw0rd
     hikari:

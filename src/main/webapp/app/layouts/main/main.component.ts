@@ -7,6 +7,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/core/login/login.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Account } from 'app/core/user/account.model';
+import { ComplainService } from 'app/entities/complain/complain.service';
 
 @Component({
   selector: 'bmf-main',
@@ -15,6 +16,7 @@ import { Account } from 'app/core/user/account.model';
 export class MainComponent implements OnInit {
   private renderer: Renderer2;
   account: Account | null = null;
+  totalComplains = '0';
 
   constructor(
     private accountService: AccountService,
@@ -23,7 +25,8 @@ export class MainComponent implements OnInit {
     private translateService: TranslateService,
     private localStorage: LocalStorageService,
     rootRenderer: RendererFactory2,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private complainService: ComplainService
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
   }
@@ -32,6 +35,9 @@ export class MainComponent implements OnInit {
     // try to log in automatically
     this.accountService.identity().subscribe(res => {
       this.account = res || null;
+      if (this.account !== null) {
+        this.getTotalComplains();
+      }
     });
 
     this.router.events.subscribe(event => {
@@ -48,6 +54,16 @@ export class MainComponent implements OnInit {
 
       this.renderer.setAttribute(document.querySelector('html'), 'lang', langChangeEvent.lang);
     });
+  }
+
+  getTotalComplains(): void {
+    this.complainService
+      .count({
+        'receiversId.equals': this.localStorage.retrieve('user')?.id,
+      })
+      .subscribe(resp => {
+        this.totalComplains = resp.toString();
+      });
   }
 
   private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {

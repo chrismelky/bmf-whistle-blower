@@ -1,6 +1,7 @@
 @import 'bootstrap-variables';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
+@import 'variables';
 
 /* ==============================================================
 Bootstrap tweaks
@@ -50,6 +51,12 @@ a:not([href]):not([tabindex]):hover.dropdown-item {
 a:hover {
   /* make sure browsers use the pointer cursor for anchors, even with no href */
   cursor: pointer;
+}
+table.mat-table {
+  width: 100%;
+}
+tr.data-row:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-item:hover {

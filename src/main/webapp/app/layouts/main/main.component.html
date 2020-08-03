@@ -1,7 +1,7 @@
 <!-- <bmf-page-ribbon></bmf-page-ribbon> -->
 <mat-drawer-container>
     <mat-drawer #drawer [mode]="'side'" style="width: 200px;" >
-        <mat-toolbar color="primary">
+        <mat-toolbar >
             <span class="spacer"></span>
             <button mat-icon-button (click)="drawer.toggle()" >
                 <mat-icon *ngIf="drawer.opened">clear</mat-icon>
@@ -14,7 +14,8 @@
             </mat-list-item>
             <mat-list-item *bmfHasAnyAuthority="'ROLE_ADMIN'" routerLink="/complain" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon>campaign</mat-icon>
-                <span>Complians</span>
+                <span [matBadge]="totalComplains" matBadgeColor="accent"
+                [matBadgeOverlap]='false'>Complians</span>
             </mat-list-item>
 
         </mat-nav-list>
@@ -39,10 +40,24 @@
                     <mat-icon>campaign</mat-icon>
                     <span [matBadge]="'2'" [matBadgeColor]="'accent'" matBadgeOverlap="false">Complains</span>
                 </button>
-                <button type="button" mat-button>
+                <button type="button" mat-button [matMenuTriggerFor]="appsMenu">
                     <mat-icon>apps</mat-icon>
                     <span>Applications</span>
                 </button>
+                <mat-menu #appsMenu>
+                    <a mat-menu-item target="_blank">
+                        <mat-icon>campaign</mat-icon>
+                        <span>Whistle Blower</span>
+                    </a>
+                    <a mat-menu-item target="_blank">
+                        <mat-icon>campaign</mat-icon>
+                        <span>Monitoring and Evaluation</span>
+                    </a>
+                    <a mat-menu-item target="_blank">
+                        <mat-icon>campaign</mat-icon>
+                        <span>Human Resource</span>
+                    </a>
+                </mat-menu>
                 <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()">
                     <mat-icon>person</mat-icon>
                     <span>{{account?.firstName}} {{account?.lastName}}</span>

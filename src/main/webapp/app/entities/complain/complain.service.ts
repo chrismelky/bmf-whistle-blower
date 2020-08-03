@@ -32,6 +32,11 @@ export class ComplainService {
     return this.http.get<IComplain[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  count(req?: any): Observable<number> {
+    const options = createRequestOption(req);
+    return this.http.get<number>(`${this.resourceUrl}/count`, { params: options });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

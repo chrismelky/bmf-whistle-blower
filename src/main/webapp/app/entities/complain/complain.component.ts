@@ -26,6 +26,7 @@ export class ComplainComponent implements OnInit, OnDestroy {
   ascending!: boolean;
   ngbPaginationPage = 1;
   account: Account | null = null;
+  displayedColumns = ['name', 'category', 'controlNumber', 'description', 'formActions'];
 
   constructor(
     protected complainService: ComplainService,

@@ -118,26 +118,6 @@ public class CommentResourceIT {
 
     @Test
     @Transactional
-    public void createComment() throws Exception {
-        int databaseSizeBeforeCreate = commentRepository.findAll().size();
-        // Create the Comment
-        CommentDTO commentDTO = commentMapper.toDto(comment);
-        restCommentMockMvc.perform(post("/api/comments").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(commentDTO)))
-            .andExpect(status().isCreated());
-
-        // Validate the Comment in the database
-        List<Comment> commentList = commentRepository.findAll();
-        assertThat(commentList).hasSize(databaseSizeBeforeCreate + 1);
-        Comment testComment = commentList.get(commentList.size() - 1);
-        assertThat(testComment.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testComment.getUser()).isEqualTo(DEFAULT_USER);
-        assertThat(testComment.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
-    }
-
-    @Test
-    @Transactional
     public void createCommentWithExistingId() throws Exception {
         int databaseSizeBeforeCreate = commentRepository.findAll().size();
 
@@ -157,26 +137,7 @@ public class CommentResourceIT {
     }
 
 
-    @Test
-    @Transactional
-    public void checkUserIsRequired() throws Exception {
-        int databaseSizeBeforeTest = commentRepository.findAll().size();
-        // set the field null
-        comment.setUser(null);
-
-        // Create the Comment, which fails.
-        CommentDTO commentDTO = commentMapper.toDto(comment);
-
-
-        restCommentMockMvc.perform(post("/api/comments").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(commentDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Comment> commentList = commentRepository.findAll();
-        assertThat(commentList).hasSize(databaseSizeBeforeTest);
-    }
-
+    
     @Test
     @Transactional
     public void getAllComments() throws Exception {

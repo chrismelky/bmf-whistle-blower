@@ -51,7 +51,7 @@ public class Notification implements Serializable {
         this.complain = complain;
         this.user = user;
         this.email = user.getEmail();
-        this.subject = complain.getCategory().getName().concat(" COMPLAIN");
+        this.subject = "COMPLAIN";
 	}
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here

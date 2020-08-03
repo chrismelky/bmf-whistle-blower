@@ -20,9 +20,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   exports: [
+    LayoutModule,
     MatStepperModule,
     FlexLayoutModule,
     ScrollingModule,
@@ -43,6 +47,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatExpansionModule,
     MatChipsModule,
     MatBottomSheetModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
 })
 export class JhMaterialModule {}
