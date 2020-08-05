@@ -8,6 +8,7 @@ import { FileUploadComponent } from './upload/file-upload.component';
 import { NgxErrorComponent } from './ngx-error/ngx-error.component';
 
 import { JhMaterialModule } from 'app/shared/jh-material.module';
+
 @NgModule({
   imports: [JhMaterialModule, WhistleBlowerSharedLibsModule],
   declarations: [

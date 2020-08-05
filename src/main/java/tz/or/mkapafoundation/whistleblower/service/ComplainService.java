@@ -67,9 +67,11 @@ public class ComplainService {
         if (complain.getId() == null) {
             complain.setControlNumber(Long.toString(Instant.now().toEpochMilli()));
         }
+        System.out.println("***********");
+        System.out.println(complain.getReceivers().size());
 
-        Set<User> receivers = userRepository.findByAuthorities_Name("ROLE_ADMIN");
-        complain.setReceivers(receivers);
+        //Set<User> receivers = userRepository.findByAuthorities_Name("ROLE_ADMIN");
+       // complain.setReceivers(receivers);
 
         Set<Attachment> attachments = complain.getAttachments();
         complain = complainRepository.save(complain);
@@ -80,7 +82,7 @@ public class ComplainService {
                 attachmentRepository.save(attachment);
             }
         }
-        notificationService.createFromComplain(complainRepository.getOne(complain.getId()));
+     //   notificationService.createFromComplain(complainRepository.getOne(complain.getId()));
         return complainMapper.toDto(complain);
     }
 

@@ -22,6 +22,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
@@ -49,6 +50,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatBottomSheetModule,
     MatSortModule,
     MatPaginatorModule,
+    MatCheckboxModule,
   ],
 })
 export class JhMaterialModule {}

@@ -71,7 +71,7 @@ public class Complain implements Serializable {
     @JsonIgnoreProperties(value = "complains", allowSetters = true)
     private Category category;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "complains_receivers",
                joinColumns = @JoinColumn(name = "complain_id", referencedColumnName = "id"),

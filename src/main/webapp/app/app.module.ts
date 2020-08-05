@@ -17,6 +17,8 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { ToastrModule } from 'ngx-toastr';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { ErrorComponent } from './layouts/error/error.component';
     // jhipster-needle-angular-add-module JHipster will add new module here
     WhistleBlowerEntityModule,
     WhistleBlowerAppRoutingModule,
+    AvatarModule,
+    ToastrModule.forRoot(),
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
   bootstrap: [MainComponent],

@@ -115,7 +115,8 @@
                 </mat-step>
                 <mat-step [stepControl]="suspects">
                     <ng-template matStepLabel>Suspects</ng-template>
-                    <button type="button" mat-button (click)="addSuspect()" color="primary" style="margin-bottom: 20px;">
+                    <button type="button" mat-button (click)="addSuspect()" color="primary"
+                        style="margin-bottom: 20px;">
                         <mat-icon color="primary">add</mat-icon>
                         <span>Add Suspect</span>
                     </button>
@@ -166,7 +167,8 @@
                 </mat-step>
                 <mat-step [stepControl]="witnesses">
                     <ng-template matStepLabel>Witnesses</ng-template>
-                    <button type="button" color="primary" mat-button (click)="addWitness()" style="margin-bottom: 20px;">
+                    <button type="button" color="primary" mat-button (click)="addWitness()"
+                        style="margin-bottom: 20px;">
                         <mat-icon>add</mat-icon>
                         <span>Add Witness</span>
                     </button>
@@ -215,13 +217,24 @@
                         <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="complainForm.get('receivers')!">
                     <ng-template matStepLabel>Confirmation</ng-template>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                    <button type="submit" mat-raised-button color="primary" [disabled]="complainForm.invalid || isSaving">
-                        <mat-icon>save</mat-icon><span>Submit</span>
-                    </button>
-                </div>
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>
+                                Receiver
+                            </mat-label>
+                            <mat-select formControlName="receivers" multiple>
+                                <mat-option *ngFor="let r of users" [value]="r">
+                                    {{r.firstName}} {{r.lastName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button type="submit" mat-raised-button color="primary"
+                            [disabled]="complainForm.invalid || isSaving">
+                            <mat-icon>save</mat-icon>&nbsp;<span>Submit</span>
+                        </button>
+                    </div>
                 </mat-step>
             </mat-horizontal-stepper>
         </form>

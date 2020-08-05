@@ -1,12 +1,92 @@
 <!-- <bmf-page-ribbon></bmf-page-ribbon> -->
-<mat-drawer-container>
+
+<mat-toolbar class="mat-elevation-z2">
+    <button mat-icon-button (click)="drawer.toggle()" *ngIf="isAuthenticated()">
+        <mat-icon >menu</mat-icon>
+    </button>
+    <a routerLink="/" style="color: white;">
+        <span class="logo-img"></span>
+        <span  style="font-weight: 400; color: rgb(95, 99, 104);font-family: 'Product Sans', Arial, Helvetica, sans-serif;">Whistle Blower</span>
+    </a>
+    <span class="spacer"></span>
+    <button type="button" mat-button routerLink="/">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+    </button>
+    <button type="button" mat-button routerLink="/" *ngIf="false">
+        <mat-icon>campaign</mat-icon>
+        <span [matBadge]="'2'" [matBadgeColor]="'accent'" matBadgeOverlap="false">Complains</span>
+    </button>
+    <button type="button" mat-button [matMenuTriggerFor]="appsMenu">
+        <mat-icon>apps</mat-icon>
+    </button>
+    <mat-menu #appsMenu>
+        <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
+            <div style="width: 80px; height: 80px;padding: 10px">
+                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196:8080">
+                    <mat-icon style="font-size: 30px; color:green;">campaign</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none; text-align: justify;margin-top:4px">Whistle Blower</span>
+                </a>
+            </div>
+            <div style="width: 80px; height: 80px;padding: 10px">
+                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196:9080">
+                    <mat-icon style="font-size: 30px; color:green;">person</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;text-align: justify;margin-top:4px">User Managment</span>
+                </a>
+            </div>
+            <div style="text-align: justify;" style="width: 80px; height: 80px;padding: 10px">
+                <a fxLayout="column" fxFlex fxLayoutAlign="center center">
+                    <mat-icon style="font-size: 30px; color:green;">launch</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;text-align: justify;margin-top:4px">App 3</span>
+                </a>
+            </div>
+           
+        </div>
+        <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
+            <div style="width: 80px; height: 80px;padding: 10px">
+                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+                    <mat-icon style="font-size: 30px; color:green;">launch</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: justify;">App 4</span>
+                </a>
+            </div>
+            <div style="width: 80px; height: 80px;padding: 10px">
+                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+                    <mat-icon style="font-size: 30px; color:green;">launch</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;text-align: justify;margin-top:4px">App 5</span>
+                </a>
+            </div>
+            <div style="width: 80px; height: 80px;padding: 10px">
+                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+                    <mat-icon style="font-size: 30px; color:green;">launch</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;text-align: justify;margin-top:4px">App 6</span>
+                </a>
+            </div>
+           
+        </div>
+    </mat-menu>
+    <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()">
+        <!-- <mat-icon>person</mat-icon>
+        <span>{{account?.firstName}} {{account?.lastName}}</span> -->
+        <ngx-avatar [name]="account?.firstName"></ngx-avatar>
+    </button>
+    <mat-menu #accMenu>
+        <div style="padding: 10px 20px;">
+            <span>{{account?.firstName}} {{account?.lastName}}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-menu>
+    <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()">
+        <mat-icon>login</mat-icon>
+        <span>Sign In</span>
+    </button>
+   
+</mat-toolbar>
+<mat-drawer-container style="margin-top: 4px;">
     <mat-drawer #drawer [mode]="'side'" style="width: 200px;" >
-        <mat-toolbar >
-            <span class="spacer"></span>
-            <button mat-icon-button (click)="drawer.toggle()" >
-                <mat-icon *ngIf="drawer.opened">clear</mat-icon>
-            </button>
-        </mat-toolbar>
         <mat-nav-list style="padding:20px 20px 0 0">
             <mat-list-item *bmfHasAnyAuthority="'ROLE_ADMIN'" routerLink="/category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon>category</mat-icon>
@@ -22,58 +102,6 @@
     </mat-drawer>
     <mat-drawer-content>
         <div>
-            <mat-toolbar color="primary">
-                <button mat-icon-button (click)="drawer.toggle()" *ngIf="drawer?.opened === false && isAuthenticated()">
-                    <mat-icon >menu</mat-icon>
-                </button>
-                <a routerLink="/" style="color: white;">
-                    <span class="logo-img"></span>
-                    <span>Whistle Blower</span>
-                    <!-- <span class="navbar-version">{{ version }}</span> -->
-                </a>
-                <span class="spacer"></span>
-                <button type="button" mat-button routerLink="/">
-                    <mat-icon>home</mat-icon>
-                    <span>Home</span>
-                </button>
-                <button type="button" mat-button routerLink="/" *ngIf="false">
-                    <mat-icon>campaign</mat-icon>
-                    <span [matBadge]="'2'" [matBadgeColor]="'accent'" matBadgeOverlap="false">Complains</span>
-                </button>
-                <button type="button" mat-button [matMenuTriggerFor]="appsMenu">
-                    <mat-icon>apps</mat-icon>
-                    <span>Applications</span>
-                </button>
-                <mat-menu #appsMenu>
-                    <a mat-menu-item target="_blank">
-                        <mat-icon>campaign</mat-icon>
-                        <span>Whistle Blower</span>
-                    </a>
-                    <a mat-menu-item target="_blank">
-                        <mat-icon>campaign</mat-icon>
-                        <span>Monitoring and Evaluation</span>
-                    </a>
-                    <a mat-menu-item target="_blank">
-                        <mat-icon>campaign</mat-icon>
-                        <span>Human Resource</span>
-                    </a>
-                </mat-menu>
-                <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()">
-                    <mat-icon>person</mat-icon>
-                    <span>{{account?.firstName}} {{account?.lastName}}</span>
-                </button>
-                <mat-menu #accMenu>
-                    <button mat-menu-item (click)="logout()">
-                        <mat-icon>exit_to_app</mat-icon>
-                        <span>Logout</span>
-                    </button>
-                </mat-menu>
-                <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()">
-                    <mat-icon>login</mat-icon>
-                    <span>Sign In</span>
-                </button>
-               
-            </mat-toolbar>
             <!-- <router-outlet name="navbar"></router-outlet> -->
         </div>
 

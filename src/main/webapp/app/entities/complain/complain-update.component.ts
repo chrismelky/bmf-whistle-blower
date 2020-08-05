@@ -15,6 +15,7 @@ import { UserService } from 'app/core/user/user.service';
 import { ATTACHMENT_DOWNLOAD_URL } from 'app/app.constants';
 import { MatDialog } from '@angular/material/dialog';
 import { AttachmentUpdateComponent } from './attachment-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 type SelectableEntity = ICategory | IUser;
 
@@ -38,7 +39,8 @@ export class ComplainUpdateComponent implements OnInit {
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: ToastrService
   ) {
     this.complainForm = this.fb.group({
       id: [],
@@ -53,6 +55,7 @@ export class ComplainUpdateComponent implements OnInit {
       suspects: fb.array([]),
       witnesses: fb.array([]),
       attachments: fb.array([]),
+      receivers: [null, Validators.required],
     });
   }
 
@@ -139,8 +142,8 @@ export class ComplainUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ complain }) => {
       this.updateForm(complain);
-
       this.categoryService.query().subscribe((res: HttpResponse<ICategory[]>) => (this.categories = res.body || []));
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
     });
   }
 
@@ -155,6 +158,7 @@ export class ComplainUpdateComponent implements OnInit {
       organisation: complain.organisation,
       email: complain.email,
       phoneNumber: complain.phoneNumber,
+      receivers: complain.receivers,
     });
     complain.suspects?.forEach(s => {
       this.suspects.push(this.newSuspect(s));
@@ -205,17 +209,25 @@ export class ComplainUpdateComponent implements OnInit {
       suspects: this.complainForm.get(['suspects'])!.value,
       witnesses: this.complainForm.get(['witnesses'])!.value,
       attachments: this.complainForm.get(['attachments'])!.value,
+      receivers: this.complainForm.get(['receivers'])!.value,
     };
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IComplain>>): void {
     result.subscribe(
-      () => this.onSaveSuccess(),
+      data => this.onSaveSuccess(data),
       () => this.onSaveError()
     );
   }
 
-  protected onSaveSuccess(): void {
+  protected onSaveSuccess(data: HttpResponse<IComplain>): void {
+    this.toastr.success(
+      `Your ticket number ${data.body?.controlNumber} will be reviewed and appropriate measures will be taken by the BMF management`,
+      'Thank you for submission of your complaint',
+      {
+        disableTimeOut: true,
+      }
+    );
     this.isSaving = false;
     this.previousState();
   }
