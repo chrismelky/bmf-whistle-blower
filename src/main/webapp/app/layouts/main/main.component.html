@@ -67,7 +67,7 @@
     <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()">
         <!-- <mat-icon>person</mat-icon>
         <span>{{account?.firstName}} {{account?.lastName}}</span> -->
-        <ngx-avatar [name]="account?.firstName"></ngx-avatar>
+        <ngx-avatar [name]="account?.firstName!"></ngx-avatar>
     </button>
     <mat-menu #accMenu>
         <div style="padding: 10px 20px;">
