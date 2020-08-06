@@ -7,7 +7,7 @@
     <button type="button"
     color="primary"
             mat-raised-button
-            [disabled]="name === ''"
+            [disabled]="name === '' || name=== undefined || name === null"
             (click)="onClick()">
       <mat-icon>file_upload</mat-icon>
       Select file

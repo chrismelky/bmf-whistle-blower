@@ -5,7 +5,6 @@ import tz.or.mkapafoundation.whistleblower.security.AuthoritiesConstants;
 import tz.or.mkapafoundation.whistleblower.service.UserService;
 import tz.or.mkapafoundation.whistleblower.service.dto.UserDTO;
 
-import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 
@@ -73,6 +72,13 @@ public class UserResource {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/by-authorities")
+    public ResponseEntity<List<UserDTO>> getByAuthorities() {
+        List<String> auth = Arrays.asList("ROLE_CEO", "ROLE_BOARD_CHAIR");
+        List<UserDTO> users = userService.getByAuthorities(auth);
+        return  ResponseEntity.ok(users);
     }
 
     /**

@@ -39,7 +39,7 @@ export const complainRoute: Routes = [
     path: '',
     component: ComplainComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.CEO, Authority.BOARD_CHAIR],
       defaultSort: 'id,asc',
       pageTitle: 'whistleBlowerApp.complain.home.title',
     },
@@ -52,7 +52,7 @@ export const complainRoute: Routes = [
       complain: ComplainResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.CEO, Authority.BOARD_CHAIR],
       pageTitle: 'whistleBlowerApp.complain.home.title',
     },
     canActivate: [UserRouteAccessService],

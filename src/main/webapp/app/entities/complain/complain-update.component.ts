@@ -143,7 +143,13 @@ export class ComplainUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ complain }) => {
       this.updateForm(complain);
       this.categoryService.query().subscribe((res: HttpResponse<ICategory[]>) => (this.categories = res.body || []));
-      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => this.filterUsers(res.body || []));
+    });
+  }
+
+  filterUsers(users: IUser[]): any {
+    this.users = users.filter((u: IUser) => {
+      return u.authorities?.includes('ROLE_CEO') || u.authorities?.includes('ROLE_BOARD_MEMBER');
     });
   }
 

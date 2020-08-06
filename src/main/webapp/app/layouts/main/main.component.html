@@ -13,10 +13,6 @@
         <mat-icon>home</mat-icon>
         <span>Home</span>
     </button>
-    <button type="button" mat-button routerLink="/" *ngIf="false">
-        <mat-icon>campaign</mat-icon>
-        <span [matBadge]="'2'" [matBadgeColor]="'accent'" matBadgeOverlap="false">Complains</span>
-    </button>
     <button type="button" mat-button [matMenuTriggerFor]="appsMenu">
         <mat-icon>apps</mat-icon>
     </button>
@@ -24,41 +20,41 @@
         <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196:8080">
-                    <mat-icon style="font-size: 30px; color:green;">campaign</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none; text-align: justify;margin-top:4px">Whistle Blower</span>
+                    <mat-icon style="font-size: 30px; color:#3f51b5;">campaign</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none; text-align: center;margin-top:4px">Whistle Blower</span>
                 </a>
             </div>
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196:9080">
-                    <mat-icon style="font-size: 30px; color:green;">person</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: justify;margin-top:4px">User Managment</span>
+                    <mat-icon style="font-size: 30px; color:#3f51b5;">person</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">User Managment</span>
                 </a>
             </div>
-            <div style="text-align: justify;" style="width: 80px; height: 80px;padding: 10px">
-                <a fxLayout="column" fxFlex fxLayoutAlign="center center">
-                    <mat-icon style="font-size: 30px; color:green;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: justify;margin-top:4px">App 3</span>
+            <div style="width: 80px; height: 80px;padding: 10px">
+                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196">
+                    <mat-icon style="font-size: 30px; color:#3f51b5;">person</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">Bmf Account</span>
                 </a>
             </div>
-           
+            
         </div>
         <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
-                    <mat-icon style="font-size: 30px; color:green;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: justify;">App 4</span>
+                    <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: center;">App 4</span>
                 </a>
             </div>
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
-                    <mat-icon style="font-size: 30px; color:green;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: justify;margin-top:4px">App 5</span>
+                    <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">App 5</span>
                 </a>
             </div>
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
-                    <mat-icon style="font-size: 30px; color:green;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: justify;margin-top:4px">App 6</span>
+                    <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">App 6</span>
                 </a>
             </div>
            
@@ -67,7 +63,7 @@
     <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()">
         <!-- <mat-icon>person</mat-icon>
         <span>{{account?.firstName}} {{account?.lastName}}</span> -->
-        <ngx-avatar [name]="account?.firstName!"></ngx-avatar>
+        <ngx-avatar [name]="account?.firstName! || account?.login!" bgColor="#3f51b5"></ngx-avatar>
     </button>
     <mat-menu #accMenu>
         <div style="padding: 10px 20px;">
@@ -85,14 +81,14 @@
     </button>
    
 </mat-toolbar>
-<mat-drawer-container style="margin-top: 4px;">
+<mat-drawer-container style="margin-top: 4px;" full>
     <mat-drawer #drawer [mode]="'side'" style="width: 200px;" >
         <mat-nav-list style="padding:20px 20px 0 0">
             <mat-list-item *bmfHasAnyAuthority="'ROLE_ADMIN'" routerLink="/category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon>category</mat-icon>
                 <span>Categories</span>
             </mat-list-item>
-            <mat-list-item *bmfHasAnyAuthority="'ROLE_ADMIN'" routerLink="/complain" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-list-item *bmfHasAnyAuthority="'ROLE_CEO','ROLE_BOARD_CHAIR'" routerLink="/complain" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon>campaign</mat-icon>
                 <span [matBadge]="totalComplains" matBadgeColor="accent"
                 [matBadgeOverlap]='false'>Complians</span>
@@ -110,7 +106,7 @@
                 <router-outlet></router-outlet>
             </div>
 
-            <bmf-footer></bmf-footer>
+            <!-- <bmf-footer></bmf-footer> -->
         </div>
     </mat-drawer-content>
 </mat-drawer-container>

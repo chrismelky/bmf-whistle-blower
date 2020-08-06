@@ -92,6 +92,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.GET, "/api/attachments/download").permitAll()
             .antMatchers(HttpMethod.GET, "/api/categories").permitAll()
             .antMatchers(HttpMethod.GET, "/api/users").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/users/by-authorities").permitAll()
             .antMatchers(HttpMethod.POST, "/api/complains").permitAll()
             .antMatchers(HttpMethod.PUT, "/api/complains").permitAll()
             .antMatchers(HttpMethod.GET, "/api/complains/*").permitAll()

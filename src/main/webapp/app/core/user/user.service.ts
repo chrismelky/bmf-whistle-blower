@@ -16,4 +16,8 @@ export class UserService {
     const options = createRequestOption(req);
     return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
+
+  byAuthorities(): Observable<HttpResponse<IUser[]>> {
+    return this.http.get<IUser[]>(`${this.resourceUrl}/by-authorities`, { observe: 'response' });
+  }
 }

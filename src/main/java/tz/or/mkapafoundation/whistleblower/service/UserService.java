@@ -80,6 +80,14 @@ public class UserService {
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);
     }
+    
+    @Transactional(readOnly = true)
+    public List<UserDTO> getByAuthorities(List<String> authNames) {
+        return userRepository
+        .findByAuthorities_Name("ROLE_CEO")
+        .stream()
+        .map(UserDTO::new).collect(Collectors.toList());
+    }
 
 
     /**

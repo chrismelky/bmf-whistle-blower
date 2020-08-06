@@ -82,7 +82,7 @@ public class ComplainService {
                 attachmentRepository.save(attachment);
             }
         }
-     //   notificationService.createFromComplain(complainRepository.getOne(complain.getId()));
+        notificationService.createFromComplain(complainRepository.getOne(complain.getId()));
         return complainMapper.toDto(complain);
     }
 
