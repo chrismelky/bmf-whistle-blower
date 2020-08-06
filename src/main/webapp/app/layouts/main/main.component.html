@@ -18,12 +18,7 @@
     </button>
     <mat-menu #appsMenu>
         <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
-            <div style="width: 80px; height: 80px;padding: 10px">
-                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196:8080">
-                    <mat-icon style="font-size: 30px; color:#3f51b5;">campaign</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none; text-align: center;margin-top:4px">Whistle Blower</span>
-                </a>
-            </div>
+            
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196:9080">
                     <mat-icon style="font-size: 30px; color:#3f51b5;">person</mat-icon>
@@ -36,33 +31,38 @@
                     <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">Bmf Account</span>
                 </a>
             </div>
+
+            <div style="width: 80px; height: 80px;padding: 10px">
+                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+                    <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
+                    <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: center;">M&E System</span>
+                </a>
+            </div>
             
         </div>
         <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
                     <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: center;">App 4</span>
+                    <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: center;">CHAID</span>
                 </a>
             </div>
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
                     <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">App 5</span>
+                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">HRHIS</span>
                 </a>
             </div>
             <div style="width: 80px; height: 80px;padding: 10px">
                 <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
                     <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">App 6</span>
+                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">OPA</span>
                 </a>
             </div>
            
         </div>
     </mat-menu>
     <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()">
-        <!-- <mat-icon>person</mat-icon>
-        <span>{{account?.firstName}} {{account?.lastName}}</span> -->
         <ngx-avatar [name]="account?.firstName! || account?.login!" bgColor="#3f51b5"></ngx-avatar>
     </button>
     <mat-menu #accMenu>

@@ -149,7 +149,7 @@ export class ComplainUpdateComponent implements OnInit {
 
   filterUsers(users: IUser[]): any {
     this.users = users.filter((u: IUser) => {
-      return u.authorities?.includes('ROLE_CEO') || u.authorities?.includes('ROLE_BOARD_MEMBER');
+      return u.authorities?.includes('ROLE_CEO') || u.authorities?.includes('ROLE_BOARD_CHAIR');
     });
   }
 
