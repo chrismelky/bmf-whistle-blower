@@ -116,7 +116,7 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: http://localhost:9080/auth/realms/bmf
+            issuer-uri: http://161.35.127.196:9080/auth/realms/bmf
         registration:
           oidc:
             client-id: web_app
