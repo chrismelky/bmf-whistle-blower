@@ -3,6 +3,7 @@ package tz.or.mkapafoundation.whistleblower.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -45,6 +46,10 @@ public class Notification implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = "notifications", allowSetters = true)
     private Complain complain;
+
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "log")
+    private String log;
 
     public Notification(){}
     public Notification(Complain complain, User user) {
@@ -152,6 +157,7 @@ public class Notification implements Serializable {
         }
         return id != null && id.equals(((Notification) o).id);
     }
+    
 
     @Override
     public int hashCode() {
@@ -168,5 +174,13 @@ public class Notification implements Serializable {
             ", isSent='" + isIsSent() + "'" +
             ", ignore='" + isIgnore() + "'" +
             "}";
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
     }
 }
