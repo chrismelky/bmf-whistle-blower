@@ -31,7 +31,6 @@ public class ComplainService {
 
     private final ComplainRepository complainRepository;
 
-    private final UserRepository userRepository;
 
     private final ComplainMapper complainMapper;
 
@@ -43,7 +42,6 @@ public class ComplainService {
             final UserRepository userRepository, AttachmentRepository attachmentRepository, NotificationService notificationService) {
         this.complainRepository = complainRepository;
         this.complainMapper = complainMapper;
-        this.userRepository = userRepository;
         this.attachmentRepository = attachmentRepository;
         this.notificationService = notificationService;
     }
@@ -54,7 +52,6 @@ public class ComplainService {
      * @param complainDTO the entity to save.
      * @return the persisted entity.
      */
-    @Transactional
     public ComplainDTO save(final ComplainDTO complainDTO) {
         log.debug("Request to save Complain : {}", complainDTO);
         Complain complain = complainMapper.toEntity(complainDTO);
@@ -67,12 +64,7 @@ public class ComplainService {
         if (complain.getId() == null) {
             complain.setControlNumber(Long.toString(Instant.now().toEpochMilli()));
         }
-        System.out.println("***********");
-        System.out.println(complain.getReceivers().size());
-
-        //Set<User> receivers = userRepository.findByAuthorities_Name("ROLE_ADMIN");
-       // complain.setReceivers(receivers);
-
+       
         Set<Attachment> attachments = complain.getAttachments();
         complain = complainRepository.save(complain);
         // Upadte attachment to link with complain while creating
@@ -82,7 +74,6 @@ public class ComplainService {
                 attachmentRepository.save(attachment);
             }
         }
-        notificationService.createFromComplain(complainRepository.getOne(complain.getId()));
         return complainMapper.toDto(complain);
     }
 

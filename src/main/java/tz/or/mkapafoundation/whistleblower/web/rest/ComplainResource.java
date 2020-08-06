@@ -1,9 +1,12 @@
 package tz.or.mkapafoundation.whistleblower.web.rest;
 
 import tz.or.mkapafoundation.whistleblower.service.ComplainService;
+import tz.or.mkapafoundation.whistleblower.service.NotificationService;
 import tz.or.mkapafoundation.whistleblower.web.rest.errors.BadRequestAlertException;
 import tz.or.mkapafoundation.whistleblower.service.dto.ComplainDTO;
 import tz.or.mkapafoundation.whistleblower.service.dto.ComplainCriteria;
+import tz.or.mkapafoundation.whistleblower.repository.ComplainRepository;
+import tz.or.mkapafoundation.whistleblower.repository.UserRepository;
 import tz.or.mkapafoundation.whistleblower.service.ComplainQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -41,11 +45,20 @@ public class ComplainResource {
 
     private final ComplainService complainService;
 
+    private final NotificationService notificationService;
+
+    private final ComplainRepository complainRepository;
+
+
     private final ComplainQueryService complainQueryService;
 
-    public ComplainResource(ComplainService complainService, ComplainQueryService complainQueryService) {
+    public ComplainResource(final ComplainRepository complainRepository,ComplainService complainService, ComplainQueryService complainQueryService,
+    final UserRepository userRepository, NotificationService notificationService) {
         this.complainService = complainService;
         this.complainQueryService = complainQueryService;
+        this.notificationService = notificationService;
+        this.complainRepository = complainRepository;
+
     }
 
     /**
@@ -62,6 +75,8 @@ public class ComplainResource {
             throw new BadRequestAlertException("A new complain cannot already have an ID", ENTITY_NAME, "idexists");
         }
         ComplainDTO result = complainService.save(complainDTO);
+        notificationService.createFromComplain(result);
+
         return ResponseEntity.created(new URI("/api/complains/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);

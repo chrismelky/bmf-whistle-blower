@@ -78,7 +78,12 @@ public class Complain implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "receivers_id", referencedColumnName = "id"))
     private Set<User> receivers = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    public Complain() {}
+    public Complain(Long id) {
+        this.id = id;
+	}
+
+	// jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
