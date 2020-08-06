@@ -820,6 +820,7 @@
                     </executions>
                     <configuration>
                         <mainClass>${start-class}</mainClass>
+                        <executable>true</executable>
                         <fork>true</fork>
                         <embeddedLaunchScriptProperties>
                             <mode>service</mode>
