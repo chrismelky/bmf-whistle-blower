@@ -40,6 +40,13 @@
     <changeSet id="20200731105146-1-relations" author="jhipster">
 
     </changeSet>
+    <changeSet id="20200731105146-log-column" author="chris">
+        <addColumn tableName="notifications">
+            <column name="log" type="text">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
 </databaseChangeLog>

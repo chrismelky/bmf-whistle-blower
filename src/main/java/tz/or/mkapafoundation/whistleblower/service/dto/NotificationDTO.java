@@ -27,7 +27,9 @@ public class NotificationDTO implements Serializable {
     private Long complainId;
 
     private String complainDescription;
-    
+
+    private String log;
+
     public Long getId() {
         return id;
     }
@@ -100,6 +102,8 @@ public class NotificationDTO implements Serializable {
         this.complainDescription = complainDescription;
     }
 
+    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -131,5 +135,13 @@ public class NotificationDTO implements Serializable {
             ", complainId=" + getComplainId() +
             ", complainDescription='" + getComplainDescription() + "'" +
             "}";
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
     }
 }

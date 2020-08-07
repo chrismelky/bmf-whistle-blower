@@ -127,7 +127,7 @@ spring:
       max-file-size: 20MB
   content:
     fs:
-      filesystem-root: /Users/amtz/Documents/files
+      filesystem-root: ~/files
 
 server:
   servlet:

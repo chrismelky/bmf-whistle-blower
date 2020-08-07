@@ -92,10 +92,16 @@ public class MailService {
                          new ByteArrayResource(IOUtils.toByteArray(inputStreamResource.getInputStream())));
 
                     } catch (MessagingException e) {
+                        notification.setLog(e.getMessage());
+                        notificationRepository.save(notification);
                         e.printStackTrace();
                     } catch (IllegalStateException e) {
+                        notification.setLog(e.getMessage());
+                        notificationRepository.save(notification);
                         e.printStackTrace();
                     } catch (IOException e) {
+                        notification.setLog(e.getMessage());
+                        notificationRepository.save(notification);
                         e.printStackTrace();
                     }
                 }
@@ -104,7 +110,10 @@ public class MailService {
             log.debug("Sent email to User '{}'", to);
             notification.setIsSent(true);
             notificationRepository.save(notification);
-        } catch (MessagingException | MailException  e) {
+        } catch (Exception e) {
+            log.error("Emailiiii**************", to, e.getMessage());
+            notification.setLog(e.getMessage());
+            notificationRepository.save(notification);
             if (e.getClass() == MessagingException.class) {
                 notification.setIgnore(true);
                 notificationRepository.save(notification);       
