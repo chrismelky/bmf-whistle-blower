@@ -8,6 +8,7 @@ import { LoginService } from 'app/core/login/login.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Account } from 'app/core/user/account.model';
 import { ComplainService } from 'app/entities/complain/complain.service';
+import { ProfileService } from '../profiles/profile.service';
 
 @Component({
   selector: 'bmf-main',
@@ -17,6 +18,7 @@ export class MainComponent implements OnInit {
   private renderer: Renderer2;
   account: Account | null = null;
   totalComplains = '0';
+  inProduction: boolean | undefined = false;
 
   constructor(
     private accountService: AccountService,
@@ -26,12 +28,16 @@ export class MainComponent implements OnInit {
     private localStorage: LocalStorageService,
     rootRenderer: RendererFactory2,
     private loginService: LoginService,
-    private complainService: ComplainService
+    private complainService: ComplainService,
+    private profileService: ProfileService
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
   }
 
   ngOnInit(): void {
+    this.profileService.getProfileInfo().subscribe(inf => {
+      this.inProduction = inf.inProduction;
+    });
     // try to log in automatically
     this.accountService.identity().subscribe(res => {
       this.account = res || null;

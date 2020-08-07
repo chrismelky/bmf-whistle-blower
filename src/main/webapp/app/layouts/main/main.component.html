@@ -26,7 +26,8 @@
                 </a>
             </div>
             <div style="width: 80px; height: 80px;padding: 10px">
-                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196">
+                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" 
+                [href]="(inProduction) ? 'http://161.35.127.196': 'http://localhost'">
                     <mat-icon style="font-size: 30px; color:#3f51b5;">person</mat-icon>
                     <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">Bmf Account</span>
                 </a>
