@@ -1,6 +1,7 @@
 package tz.or.mkapafoundation.whistleblower.repository;
 
 import tz.or.mkapafoundation.whistleblower.domain.Complain;
+import tz.or.mkapafoundation.whistleblower.domain.ComplainStatus;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,4 +27,10 @@ public interface ComplainRepository extends JpaRepository<Complain, Long>, JpaSp
 
     @Query("select complain from Complain complain left join fetch complain.receivers where complain.id =:id")
     Optional<Complain> findOneWithEagerRelationships(@Param("id") Long id);
+
+    Optional<Complain> findFirstByControlNumber(String controlNumber);
+
+    @Modifying
+    @Query("UPDATE Complain co SET co.status=:status WHERE co.id=:id")
+    int updateStatus(@Param("id")Long id, @Param("status") ComplainStatus status);
 }

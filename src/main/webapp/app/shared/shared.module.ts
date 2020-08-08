@@ -8,6 +8,7 @@ import { FileUploadComponent } from './upload/file-upload.component';
 import { NgxErrorComponent } from './ngx-error/ngx-error.component';
 
 import { JhMaterialModule } from 'app/shared/jh-material.module';
+import { ComplainStatusComponent } from 'app/entities/complain/complain-status.component';
 
 @NgModule({
   imports: [JhMaterialModule, WhistleBlowerSharedLibsModule],
@@ -18,6 +19,7 @@ import { JhMaterialModule } from 'app/shared/jh-material.module';
     HasAnyAuthorityDirective,
     FileUploadComponent,
     NgxErrorComponent,
+    ComplainStatusComponent,
   ],
   exports: [
     JhMaterialModule,
@@ -28,6 +30,7 @@ import { JhMaterialModule } from 'app/shared/jh-material.module';
     HasAnyAuthorityDirective,
     FileUploadComponent,
     NgxErrorComponent,
+    ComplainStatusComponent,
   ],
 })
 export class WhistleBlowerSharedModule {}

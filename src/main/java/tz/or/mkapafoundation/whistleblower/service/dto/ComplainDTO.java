@@ -1,6 +1,7 @@
 package tz.or.mkapafoundation.whistleblower.service.dto;
 
-import javax.validation.constraints.*;
+import tz.or.mkapafoundation.whistleblower.domain.ComplainStatus;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,11 @@ import javax.persistence.Lob;
  * entity.
  */
 public class ComplainDTO implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     private Long id;
 
@@ -25,6 +31,8 @@ public class ComplainDTO implements Serializable {
     private String phoneNumber;
 
     private String controlNumber;
+
+    private ComplainStatus status = ComplainStatus.PENDING;
 
     @Lob
     private String description;
@@ -182,5 +190,13 @@ public class ComplainDTO implements Serializable {
             ", categoryName='" + getCategoryName() + "'" +
             ", receivers='" + getReceivers() + "'" +
             "}";
+    }
+
+    public ComplainStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ComplainStatus status) {
+        this.status = status;
     }
 }

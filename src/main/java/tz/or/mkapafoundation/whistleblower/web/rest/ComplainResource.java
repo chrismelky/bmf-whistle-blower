@@ -5,6 +5,7 @@ import tz.or.mkapafoundation.whistleblower.service.NotificationService;
 import tz.or.mkapafoundation.whistleblower.web.rest.errors.BadRequestAlertException;
 import tz.or.mkapafoundation.whistleblower.service.dto.ComplainDTO;
 import tz.or.mkapafoundation.whistleblower.service.dto.ComplainCriteria;
+import tz.or.mkapafoundation.whistleblower.domain.ComplainStatus;
 import tz.or.mkapafoundation.whistleblower.repository.ComplainRepository;
 import tz.or.mkapafoundation.whistleblower.repository.UserRepository;
 import tz.or.mkapafoundation.whistleblower.service.ComplainQueryService;
@@ -139,6 +140,21 @@ public class ComplainResource {
     @GetMapping("/complains/{id}")
     public ResponseEntity<ComplainDTO> getComplain(@PathVariable Long id) {
         log.debug("REST request to get Complain : {}", id);
+        Optional<ComplainDTO> complainDTO = complainService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(complainDTO);
+    }
+
+    @GetMapping("/complains/by-control-number/{controlNumber}")
+    public ResponseEntity<ComplainDTO> getByControl(@PathVariable String controlNumber) {
+        log.debug("REST request to get Complain by control : {}", controlNumber);
+        Optional<ComplainDTO> complainDTO = complainService.findByControlNumber(controlNumber);
+        return ResponseUtil.wrapOrNotFound(complainDTO);
+    }
+
+    @GetMapping("/complains/update-status/{id}/{status}")
+    public ResponseEntity<ComplainDTO> updateStatus(@PathVariable Long id, @PathVariable ComplainStatus status) {
+        log.debug("REST request to update Complain status by : {}", id);
+        complainService.updateStatus(id, status);
         Optional<ComplainDTO> complainDTO = complainService.findOne(id);
         return ResponseUtil.wrapOrNotFound(complainDTO);
     }

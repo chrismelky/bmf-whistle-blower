@@ -16,6 +16,7 @@ export interface IComplain {
   suspects?: ISuspect[];
   attachments?: IAttachment[];
   categoryName?: string;
+  status?: string;
   categoryId?: number;
   receivers?: IUser[];
 }
@@ -34,6 +35,7 @@ export class Complain implements IComplain {
     public suspects?: ISuspect[],
     public attachments?: IAttachment[],
     public categoryName?: string,
+    public status?: string,
     public categoryId?: number,
     public receivers?: IUser[]
   ) {}

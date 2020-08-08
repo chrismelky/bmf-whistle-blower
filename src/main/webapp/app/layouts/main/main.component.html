@@ -9,6 +9,15 @@
         <span  style="font-weight: 400; color: rgb(95, 99, 104);font-family: 'Product Sans', Arial, Helvetica, sans-serif;">Whistle Blower</span>
     </a>
     <span class="spacer"></span>
+    <div class="input-group" style="width: 300px;">
+        <input #search type="text" class="form-control" 
+        placeholder="Complain token" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button mat-icon-button (click)="openStatusDialog(search.value)">
+              <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
     <button type="button" mat-button routerLink="/">
         <mat-icon>home</mat-icon>
         <span>Home</span>

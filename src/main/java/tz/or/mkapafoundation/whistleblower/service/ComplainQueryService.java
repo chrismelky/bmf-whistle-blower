@@ -1,6 +1,7 @@
 package tz.or.mkapafoundation.whistleblower.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.criteria.JoinType;
 
@@ -51,7 +52,7 @@ public class ComplainQueryService extends QueryService<Complain> {
     public List<ComplainDTO> findByCriteria(ComplainCriteria criteria) {
         log.debug("find by criteria : {}", criteria);
         final Specification<Complain> specification = createSpecification(criteria);
-        return complainMapper.toDto(complainRepository.findAll(specification));
+       return complainRepository.findAll(specification).stream().map(complainMapper::toDto).collect(Collectors.toList());
     }
 
     /**

@@ -34,6 +34,28 @@ export class ComplainResolve implements Resolve<IComplain> {
   }
 }
 
+@Injectable({ providedIn: 'root' })
+export class ComplainStatusResolve implements Resolve<IComplain> {
+  constructor(private service: ComplainService, private router: Router) {}
+
+  resolve(route: ActivatedRouteSnapshot): Observable<IComplain> | Observable<never> {
+    const token = route.params['controlNumber'];
+    if (token) {
+      return this.service.findByControlNumber(token).pipe(
+        flatMap((complain: HttpResponse<Complain>) => {
+          if (complain.body) {
+            return of(complain.body);
+          } else {
+            this.router.navigate(['404']);
+            return EMPTY;
+          }
+        })
+      );
+    }
+    return of(new Complain());
+  }
+}
+
 export const complainRoute: Routes = [
   {
     path: '',
@@ -56,6 +78,16 @@ export const complainRoute: Routes = [
       pageTitle: 'whistleBlowerApp.complain.home.title',
     },
     canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':controlNumber/status',
+    component: ComplainDetailComponent,
+    resolve: {
+      complain: ComplainStatusResolve,
+    },
+    data: {
+      pageTitle: 'whistleBlowerApp.complain.home.title',
+    },
   },
   {
     path: 'new',

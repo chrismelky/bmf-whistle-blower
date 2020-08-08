@@ -1,0 +1,20 @@
+<mat-dialog-content>
+    <div fxLayout="row">
+        <mat-label>Token: </mat-label>
+        <span>{{data.controlNumber}}</span>
+    </div>
+    <div fxLayout="row">
+        <mat-label>Status: </mat-label>
+        <mat-chip-list>
+            <mat-chip>
+                {{data?.status}}
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions >
+    <span class="spacer"></span>
+  <button mat-button color="warn" (click)="close()">
+      Close
+  </button>
+</mat-dialog-actions>

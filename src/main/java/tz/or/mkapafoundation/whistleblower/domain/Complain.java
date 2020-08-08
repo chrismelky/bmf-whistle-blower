@@ -50,6 +50,9 @@ public class Complain implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "status")
+    private ComplainStatus status;
+
     @OneToMany(mappedBy = "complain",cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Witness> witnesses = new HashSet<>();
@@ -293,6 +296,8 @@ public class Complain implements Serializable {
     public void setReceivers(Set<User> users) {
         this.receivers = users;
     }
+
+    
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -324,5 +329,13 @@ public class Complain implements Serializable {
             ", controlNumber='" + getControlNumber() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
+    }
+
+    public ComplainStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ComplainStatus status) {
+        this.status = status;
     }
 }

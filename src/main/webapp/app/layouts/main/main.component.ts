@@ -9,6 +9,10 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { Account } from 'app/core/user/account.model';
 import { ComplainService } from 'app/entities/complain/complain.service';
 import { ProfileService } from '../profiles/profile.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ComplainStatusComponent } from 'app/entities/complain/complain-status.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'bmf-main',
@@ -29,7 +33,9 @@ export class MainComponent implements OnInit {
     rootRenderer: RendererFactory2,
     private loginService: LoginService,
     private complainService: ComplainService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private dialog: MatDialog,
+    private toastr: ToastrService
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
   }
@@ -60,6 +66,26 @@ export class MainComponent implements OnInit {
 
       this.renderer.setAttribute(document.querySelector('html'), 'lang', langChangeEvent.lang);
     });
+  }
+
+  openStatusDialog(search?: string): void {
+    if (search?.length! > 0) {
+      this.complainService.findByControlNumber(search!).subscribe(
+        result => {
+          const dialogRef = this.dialog.open(ComplainStatusComponent, {
+            width: '400px',
+            data: result.body,
+          });
+
+          dialogRef.afterClosed().subscribe(() => {});
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 404) {
+            this.toastr.warning(`No Complain found with token ${search}`, 'Not found', { timeOut: 5000 });
+          }
+        }
+      );
+    }
   }
 
   getTotalComplains(): void {

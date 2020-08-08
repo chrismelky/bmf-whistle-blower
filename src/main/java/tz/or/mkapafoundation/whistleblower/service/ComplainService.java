@@ -2,6 +2,7 @@ package tz.or.mkapafoundation.whistleblower.service;
 
 import tz.or.mkapafoundation.whistleblower.domain.Attachment;
 import tz.or.mkapafoundation.whistleblower.domain.Complain;
+import tz.or.mkapafoundation.whistleblower.domain.ComplainStatus;
 import tz.or.mkapafoundation.whistleblower.domain.User;
 import tz.or.mkapafoundation.whistleblower.repository.AttachmentRepository;
 import tz.or.mkapafoundation.whistleblower.repository.ComplainRepository;
@@ -120,5 +121,13 @@ public class ComplainService {
         log.debug("Request to delete Complain : {}", id);
         notificationService.deleteByComplain(id);
         complainRepository.deleteById(id);
+    }
+
+    public Optional<ComplainDTO> findByControlNumber(String token) {
+        return complainRepository.findFirstByControlNumber(token).map(complainMapper::toDto);
+    }
+
+    public int updateStatus(Long id, ComplainStatus status) {
+        return complainRepository.updateStatus(id, status);
     }
 }

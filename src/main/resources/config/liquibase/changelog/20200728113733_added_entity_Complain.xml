@@ -57,6 +57,12 @@
         <addPrimaryKey columnNames="complain_id, receivers_id" tableName="complains_receivers"/>
         
     </changeSet>
+
+    <changeSet id="20200728113733-status" author="chris">
+        <addColumn tableName="complains">
+            <column name="status" type="varchar(100)"></column>
+        </addColumn>
+    </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
 </databaseChangeLog>

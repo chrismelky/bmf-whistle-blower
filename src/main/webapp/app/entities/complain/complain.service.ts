@@ -27,6 +27,10 @@ export class ComplainService {
     return this.http.get<IComplain>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByControlNumber(token: string): Observable<EntityResponseType> {
+    return this.http.get<IComplain>(`${this.resourceUrl}/by-control-number/${token}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IComplain[]>(this.resourceUrl, { params: options, observe: 'response' });
@@ -39,5 +43,9 @@ export class ComplainService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  updateStatus(id: number, status: string): Observable<HttpResponse<{}>> {
+    return this.http.get(`${this.resourceUrl}/update-status/${id}/${status}`, { observe: 'response' });
   }
 }

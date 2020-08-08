@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Spring Data  repository for the Attachment entity.
  */
 @SuppressWarnings("unused")
-@Repository
+@Repository 
 public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
 
 	Optional<Attachment> findByContentId(String contentId);
