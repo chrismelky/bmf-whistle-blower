@@ -232,6 +232,8 @@ export class ComplainUpdateComponent implements OnInit {
       'Thank you for submission of your complaint',
       {
         disableTimeOut: true,
+        closeButton: true,
+        tapToDismiss: false,
       }
     );
     this.isSaving = false;

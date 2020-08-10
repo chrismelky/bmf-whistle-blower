@@ -1,6 +1,7 @@
 <div fxLayout="row" style="width: 100%;">
     <div fxFlex="60%" style="border-right: 1px solid rgba(0, 0, 0, 0.12);padding:10px">
-        <mat-button-toggle-group color="primary" style="align-self: end;"> 
+        <mat-button-toggle-group #status="matButtonToggleGroup" color="primary" style="margin-bottom: 10px;" 
+        (change)="changeStatus(status.value)"> 
             <mat-button-toggle [checked]="complain?.status === 'PENDING'" value="PENDING">Pending</mat-button-toggle>
             <mat-button-toggle [checked]="complain?.status === 'ON_PROGRESS'" value="ON_PROGRESS">On Progress</mat-button-toggle>
             <mat-button-toggle [checked]="complain?.status === 'CLOSED'" value="CLOSED">Closed</mat-button-toggle>
@@ -12,11 +13,6 @@
                     <mat-chip-list>
                         <mat-chip color="accent">
                             {{complain?.categoryName}} Complain
-                        </mat-chip>
-                    </mat-chip-list>
-                    <mat-chip-list color="accent">
-                        <mat-chip color="accent">
-                            {{complain?.status}}
                         </mat-chip>
                     </mat-chip-list>
                 </mat-expansion-panel-header>

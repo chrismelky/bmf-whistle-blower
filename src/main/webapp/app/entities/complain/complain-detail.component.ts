@@ -8,6 +8,8 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { CommentService } from './comment.service';
 import { IComment } from 'app/shared/model/comment.model';
 import { ATTACHMENT_DOWNLOAD_URL } from 'app/app.constants';
+import { ComplainService } from './complain.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'bmf-complain-detail',
@@ -22,7 +24,9 @@ export class ComplainDetailComponent implements OnInit {
     protected dataUtils: JhiDataUtils,
     protected activatedRoute: ActivatedRoute,
     private commentService: CommentService,
-    private commentDialog: MatBottomSheet
+    private commentDialog: MatBottomSheet,
+    private complainService: ComplainService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +42,17 @@ export class ComplainDetailComponent implements OnInit {
     this.commentService.getByComplian(this.complain?.id!).subscribe(res => (this.comments = res.body || []));
   }
 
+  changeStatus(status: string): void {
+    this.complainService.updateStatus(this.complain?.id!, status).subscribe(
+      () => {
+        // @typescript-eslint/no-unused-vars
+        this.toastr.success('Status updated successfully');
+      },
+      () => {
+        this.toastr.error('Sorry!! Could not update status');
+      }
+    );
+  }
   byteSize(base64String: string): string {
     return this.dataUtils.byteSize(base64String);
   }
