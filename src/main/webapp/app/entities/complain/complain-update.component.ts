@@ -28,6 +28,9 @@ export class ComplainUpdateComponent implements OnInit {
   categories: ICategory[] = [];
   users: IUser[] = [];
   complainForm: FormGroup;
+  hasPerson = false;
+  hasWitness = false;
+  hasSuspect = false;
 
   public downloadUrl = ATTACHMENT_DOWNLOAD_URL;
 

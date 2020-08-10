@@ -6,8 +6,26 @@
         <div>
             <bmf-alert-error></bmf-alert-error>
         </div>
+        <br />
+        <div fxLayout="column" style="margin-left: 24px;" fxLayoutGap="8px">
+            <mat-label>
+                Select other detail you will provide <i>e.g (Personal information, suspects,witnesses )</i>
+            </mat-label>
+            <div fxLayout="row">
+                <mat-checkbox [(ngModel)]="hasPerson" color="primary" style="margin-left: 4px;">
+                    Personal Info
+                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="hasSuspect" color="primary" style="margin-left: 4px;">
+                    Suspects
+                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="hasWitness" color="primary" style="margin-left: 4px;">
+                    Witnesses
+                </mat-checkbox>
+            </div>
+        </div>
+
         <form [formGroup]="complainForm" (ngSubmit)="save()">
-            <mat-horizontal-stepper [linear]="false" #stepper>
+            <mat-horizontal-stepper [linear]="true" #stepper>
                 <mat-step [stepControl]="complainForm.get('categoryId')! && complainForm.get('description')!">
                     <ng-template matStepLabel>Complain Information</ng-template>
                     <div fxLayout="row">
@@ -69,7 +87,7 @@
                         <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
-                <mat-step>
+                <mat-step *ngIf="hasPerson">
                     <ng-template matStepLabel>Personal Information</ng-template>
                     <div fxLayout="column">
                         <div fxLayout="row" fxLayoutGap="10px">
@@ -113,7 +131,7 @@
                         <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
-                <mat-step [stepControl]="suspects">
+                <mat-step [stepControl]="suspects" *ngIf="hasSuspect">
                     <ng-template matStepLabel>Suspects</ng-template>
                     <button type="button" mat-button (click)="addSuspect()" color="primary"
                         style="margin-bottom: 20px;">
@@ -165,7 +183,7 @@
                         <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
-                <mat-step [stepControl]="witnesses">
+                <mat-step [stepControl]="witnesses" *ngIf="hasWitness">
                     <ng-template matStepLabel>Witnesses</ng-template>
                     <button type="button" color="primary" mat-button (click)="addWitness()"
                         style="margin-bottom: 20px;">
