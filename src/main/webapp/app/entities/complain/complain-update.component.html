@@ -7,7 +7,7 @@
             <bmf-alert-error></bmf-alert-error>
         </div>
         <form [formGroup]="complainForm" (ngSubmit)="save()">
-            <mat-horizontal-stepper [linear]="true" #stepper>
+            <mat-horizontal-stepper [linear]="false" #stepper>
                 <mat-step [stepControl]="complainForm.get('categoryId')! && complainForm.get('description')!">
                     <ng-template matStepLabel>Complain Information</ng-template>
                     <div fxLayout="row">
