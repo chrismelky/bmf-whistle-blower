@@ -11,8 +11,9 @@
     <span class="spacer"></span>
     <div class="input-group" style="width: 300px;">
         <input #search type="text" class="form-control" 
+        style="height: auto; border-radius: 4px 0 0 4px;"
         placeholder="Complain token" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
+        <div class="input-group-append" style="border: 1px solid #ced4da;border-radius: 0 4px 4px 0;">
           <button mat-icon-button (click)="openStatusDialog(search.value)">
               <mat-icon>search</mat-icon>
           </button>

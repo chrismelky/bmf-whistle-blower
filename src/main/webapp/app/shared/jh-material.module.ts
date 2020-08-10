@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -51,6 +52,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatButtonToggleModule,
   ],
 })
 export class JhMaterialModule {}
