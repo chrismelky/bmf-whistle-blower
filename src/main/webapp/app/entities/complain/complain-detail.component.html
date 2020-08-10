@@ -16,7 +16,12 @@
                         </mat-chip>
                     </mat-chip-list>
                 </mat-expansion-panel-header>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea disabled matInput [value]="complain?.description"></textarea>
+                </mat-form-field>
                 <div fxLayout="row" fxLayoutGap="5px">
+                
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Name</mat-label>
                         <input disabled matInput [value]="complain?.name || 'Anonimous'" />
@@ -40,13 +45,10 @@
                         <input disabled matInput [value]="complain?.phoneNumber" />
                     </mat-form-field>
                 </div>
-                <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Description</mat-label>
-                    <textarea disabled matInput [value]="complain?.description"></textarea>
-                </mat-form-field>
+              
 
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel *ngIf="complain?.attachments?.length">
                 <mat-expansion-panel-header>
                     <mat-icon>attachment</mat-icon>&nbsp;Attachments
                 </mat-expansion-panel-header>
@@ -59,7 +61,7 @@
                     </mat-list-item>
                 </mat-list>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel *ngIf="complain?.suspects?.length">
                 <mat-expansion-panel-header>
                     <mat-icon>person</mat-icon>&nbsp;Suspects
                 </mat-expansion-panel-header>
@@ -84,7 +86,7 @@
                     </mat-list-item>
                 </mat-list>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel *ngIf="complain?.witnesses?.length">
                 <mat-expansion-panel-header>
                     <mat-icon>perm_identity</mat-icon>&nbsp;Witnesses
                 </mat-expansion-panel-header>
