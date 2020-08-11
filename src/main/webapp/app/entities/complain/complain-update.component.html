@@ -9,17 +9,20 @@
         <br />
         <div fxLayout="column" style="margin-left: 24px;" fxLayoutGap="8px">
             <mat-label>
-                Select other detail you will provide <i>e.g (Personal information, suspects,witnesses )</i>
+                <span style="font-weight:bold">Optionally select below information</span>
+<!--
+               Select other detail you will provide <i>e.g (Personal information, suspects,witnesses )</i>
+-->
             </mat-label>
             <div fxLayout="row">
                 <mat-checkbox [(ngModel)]="hasPerson" color="primary" style="margin-left: 4px;">
-                    Personal Info
+                    Personal Information
                 </mat-checkbox>
                 <mat-checkbox [(ngModel)]="hasSuspect" color="primary" style="margin-left: 4px;">
-                    Suspects
+                    Suspect Information
                 </mat-checkbox>
                 <mat-checkbox [(ngModel)]="hasWitness" color="primary" style="margin-left: 4px;">
-                    Witnesses
+                    Witness Information
                 </mat-checkbox>
             </div>
         </div>
