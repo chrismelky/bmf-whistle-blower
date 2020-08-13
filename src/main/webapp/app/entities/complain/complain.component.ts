@@ -26,7 +26,7 @@ export class ComplainComponent implements OnInit, OnDestroy {
   ascending!: boolean;
   ngbPaginationPage = 1;
   account: Account | null = null;
-  displayedColumns = ['name', 'category', 'controlNumber', 'description', 'formActions'];
+  displayedColumns = ['createdDate', 'controlNumber', 'name', 'description', 'status', 'category', 'formActions'];
 
   constructor(
     protected complainService: ComplainService,
@@ -108,11 +108,12 @@ export class ComplainComponent implements OnInit, OnDestroy {
   }
 
   sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
-    if (this.predicate !== 'id') {
-      result.push('id');
-    }
-    return result;
+    return ['createdDate,desc'];
+    // const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
+    // if (this.predicate !== 'id') {
+    //   result.push('id');
+    // }
+    // return result;
   }
 
   protected onSuccess(data: IComplain[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {

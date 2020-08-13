@@ -11,7 +11,7 @@ import javax.persistence.Lob;
  * A DTO for the {@link tz.or.mkapafoundation.whistleblower.domain.Complain}
  * entity.
  */
-public class ComplainDTO implements Serializable {
+public class ComplainDTO extends AbstractAuditingDTO implements Serializable {
 
     /**
      *

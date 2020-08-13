@@ -18,7 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "complains")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Complain implements Serializable {
+public class Complain extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
