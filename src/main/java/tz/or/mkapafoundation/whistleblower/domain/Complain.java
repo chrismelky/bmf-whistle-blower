@@ -51,6 +51,7 @@ public class Complain extends AbstractAuditingEntity implements Serializable {
     private String description;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private ComplainStatus status;
 
     @OneToMany(mappedBy = "complain",cascade = CascadeType.ALL, orphanRemoval = true)
