@@ -28,9 +28,9 @@
               Status
             </mat-label>
              <mat-select [(ngModel)]="filter['status.equals']">
-              <mat-option value="PENDING">Pending</mat-option>
-              <mat-option value="ON_PROGRESS">On Progress</mat-option>
-              <mat-option value="CLOSED">Closed</mat-option>
+              <mat-option value="0">Pending</mat-option>
+              <mat-option value="1">On Progress</mat-option>
+              <mat-option value="2">Closed</mat-option>
             </mat-select>
           </mat-form-field>
           <button mat-raised-button (click)="search()" color="primary">
