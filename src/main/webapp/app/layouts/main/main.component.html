@@ -20,8 +20,7 @@
 <mat-drawer-container>
     <mat-drawer #drawer [mode]=" isGtMd ? 'side': 'over'" style="width: 200px;">
         <mat-toolbar class="mat-elevation-z2">
-            <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()" fxShow fxHide.gt-md="true"
-                fxHide.md="true">
+            <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()" fxShow fxHide.gt-md="true">
                 <mat-icon>login</mat-icon>
                 <span>Sign In</span>
             </button>
@@ -43,6 +42,11 @@
             </mat-list-item>
 
         </mat-nav-list>
+        <span class="spacer"></span>
+        <button mat-menu-item (click)="logout()" *ngIf="isAuthenticated()" fxShow fxHide.gt-md="true">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+        </button>
     </mat-drawer>
     <mat-drawer-content style="flex: 1 1 auto">
         <mat-toolbar class="mat-elevation-z2">
