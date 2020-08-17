@@ -15,6 +15,7 @@ import { CategoryDeleteDialogComponent } from './category-delete-dialog.componen
 export class CategoryComponent implements OnInit, OnDestroy {
   categories?: ICategory[];
   eventSubscriber?: Subscription;
+  displayedColumns = ['name', 'formActions'];
 
   constructor(protected categoryService: CategoryService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
 

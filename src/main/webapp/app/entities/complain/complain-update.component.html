@@ -10,11 +10,8 @@
         <div fxLayout="column" style="margin-left: 24px;" fxLayoutGap="8px">
             <mat-label>
                 <span style="font-weight:bold">Optionally select below information</span>
-<!--
-               Select other detail you will provide <i>e.g (Personal information, suspects,witnesses )</i>
--->
             </mat-label>
-            <div fxLayout="row">
+            <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column">
                 <mat-checkbox [(ngModel)]="hasPerson" color="primary" style="margin-left: 4px;">
                     Personal Information
                 </mat-checkbox>
@@ -28,7 +25,7 @@
         </div>
 
         <form [formGroup]="complainForm" (ngSubmit)="save()">
-            <mat-horizontal-stepper [linear]="true" #stepper>
+            <mat-horizontal-stepper [linear]="true" #stepper fxShow fxHide.lt-md="true" fxHide.md="true">
                 <mat-step [stepControl]="complainForm.get('categoryId')! && complainForm.get('description')!">
                     <ng-template matStepLabel>Complain Information</ng-template>
                     <div fxLayout="row">
@@ -258,6 +255,236 @@
                     </div>
                 </mat-step>
             </mat-horizontal-stepper>
+            <mat-vertical-stepper [linear]="true" #stepper fxShow fxHide.gt-md="true">
+                <mat-step [stepControl]="complainForm.get('categoryId')! && complainForm.get('description')!">
+                    <ng-template matStepLabel>Complain Information</ng-template>
+                    <div fxLayout="row">
+                        <div fxFlex fxLayout="column">
+                            <mat-form-field class="full-width" appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.category">Category</span>
+                                </mat-label>
+                                <mat-select formControlName="categoryId" placeholder="Select Category" required>
+                                    <mat-option [value]="categoryOption.id"
+                                        *ngFor="let categoryOption of categories; trackBy: trackById">
+                                        {{ categoryOption.name }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <bmf-ngx-error [control]="complainForm.get('categoryId')" label="Category">
+                                    </bmf-ngx-error>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="full-width" appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.description">Description</span>
+                                </mat-label>
+                                <textarea matInput rows="8" formControlName="description" required></textarea>
+                                <mat-error>
+                                    <bmf-ngx-error [control]="complainForm.get('description')" label="Description">
+                                    </bmf-ngx-error>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div fxLayout="row"
+                                style="border: 1px solid rgba(0,0,0,.12); border-radius: 8px;; padding: .75em;">
+                                <mat-list fxFlex>
+                                    <div mat-subheader>
+                                        <button (click)="openAttachementDialog()" color="primary" type="button"
+                                            mat-button>
+                                            <mat-icon color="primary">add</mat-icon>
+                                            <span>Add Attachment</span>
+                                        </button>
+                                    </div>
+                                    <mat-list-item formArrayName="attachments"
+                                        *ngFor="let s of attachments.controls; let i= index">
+                                        <button type="button" mat-icon-button (click)="removeAttachment(i)">
+                                            <mat-icon color="warn">delete</mat-icon>
+                                        </button>
+                                        <div mat-line>
+                                            <a target="_blanck"
+                                                [href]="downloadUrl+'/'+s.value?.contentId">{{s.value?.name || s.value?.contentId}}</a>
+                                        </div>
+                                        <div mat-line> Type: {{s.value?.mimeType}}</div>
+                                    </mat-list-item>
+
+                                </mat-list>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 10px;">
+                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+                <mat-step *ngIf="hasPerson">
+                    <ng-template matStepLabel>Personal Information</ng-template>
+                    <div fxLayout="column">
+                        <div fxLayout="row" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.name">Name</span>
+                                </mat-label>
+                                <input matInput type="text" formControlName="name" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                </mat-label>
+                                <input matInput type="text" formControlName="position" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                </mat-label>
+                                <input matInput type="text" formControlName="organisation" />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                </mat-label>
+                                <input matInput type="text" formControlName="email" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                </mat-label>
+                                <input matInput type="text" formControlName="phoneNumber" />
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
+                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="suspects" *ngIf="hasSuspect">
+                    <ng-template matStepLabel>Suspects</ng-template>
+                    <button type="button" mat-button (click)="addSuspect()" color="primary"
+                        style="margin-bottom: 20px;">
+                        <mat-icon color="primary">add</mat-icon>
+                        <span>Add Suspect</span>
+                    </button>
+                    <div formArrayName="suspects" *ngFor="let s of suspects.controls; let i= index">
+                        <div [formGroupName]="i" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                            <div>
+                                {{i+1}}
+                            </div>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.name">Name</span>
+                                </mat-label>
+                                <input matInput formControlName="name" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                </mat-label>
+                                <input matInput formControlName="position" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jjhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                </mat-label>
+                                <input matInput formControlName="organisation" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                </mat-label>
+                                <input matInput formControlName="email" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                </mat-label>
+                                <input matInput formControlName="phoneNumber" />
+                            </mat-form-field>
+                            <button type="button" mat-icon-button (click)="removeSuspect(i)">
+                                <mat-icon color="warn">delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
+                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="witnesses" *ngIf="hasWitness">
+                    <ng-template matStepLabel>Witnesses</ng-template>
+                    <button type="button" color="primary" mat-button (click)="addWitness()"
+                        style="margin-bottom: 20px;">
+                        <mat-icon>add</mat-icon>
+                        <span>Add Witness</span>
+                    </button>
+                    <div formArrayName="witnesses" *ngFor="let s of witnesses.controls; let i= index">
+                        <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                            <div>
+                                {{i+1}}
+                            </div>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.name">Name</span>
+                                </mat-label>
+                                <input matInput formControlName="name" required />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                </mat-label>
+                                <input matInput formControlName="position" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                </mat-label>
+                                <input matInput formControlName="organisation" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                </mat-label>
+                                <input matInput formControlName="email" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="outline">
+                                <mat-label>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                </mat-label>
+                                <input matInput formControlName="phoneNumber" />
+                            </mat-form-field>
+                            <button type="button" mat-icon-button (click)="removeWitness(i)">
+                                <mat-icon color="warn">delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
+                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="complainForm.get('receivers')!">
+                    <ng-template matStepLabel>Confirmation</ng-template>
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>
+                                Receiver
+                            </mat-label>
+                            <mat-select formControlName="receivers" multiple>
+                                <mat-option *ngFor="let r of users" [value]="r">
+                                    {{r.firstName}} {{r.lastName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button type="submit" mat-raised-button color="primary"
+                            [disabled]="complainForm.invalid || isSaving">
+                            <mat-icon>save</mat-icon>&nbsp;<span>Submit</span>
+                        </button>
+                    </div>
+                </mat-step>
+            </mat-vertical-stepper>
         </form>
     </div>
 </div>

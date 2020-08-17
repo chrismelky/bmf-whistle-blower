@@ -38,6 +38,16 @@ h4 {
 mat-drawer-container {
   flex: 1 1 auto;
 }
+.searchBarBackdrop {
+  background: rgba(0, 0, 0, 0);
+}
+.searchBarPanel {
+  max-width: none !important;
+}
+.searchBarPanel .mat-dialog-container {
+  padding: 0 !important;
+  border-radius: 0px;
+}
 
 button {
   outline: none !important;

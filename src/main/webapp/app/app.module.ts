@@ -19,12 +19,14 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AvatarModule } from 'ngx-avatar';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    LayoutModule,
     WhistleBlowerSharedModule,
     WhistleBlowerCoreModule,
     WhistleBlowerHomeModule,

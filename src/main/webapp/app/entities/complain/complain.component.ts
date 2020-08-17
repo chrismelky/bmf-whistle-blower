@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
+import { Subscription, combineLatest, Observable } from 'rxjs';
 import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,6 +14,8 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { PageEvent } from '@angular/material/paginator';
 import { CategoryService } from '../category/category.service';
 import { ICategory } from 'app/shared/model/category.model';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'bmf-complain',
@@ -34,6 +36,7 @@ export class ComplainComponent implements OnInit, OnDestroy {
   filter: any = {};
   categories: ICategory[] = [];
   expanded = false;
+  gtMd!: Observable<boolean>;
 
   constructor(
     protected complainService: ComplainService,
@@ -43,9 +46,18 @@ export class ComplainComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected localStorage: LocalStorageService,
     protected modalService: NgbModal,
-    protected categoryService: CategoryService
+    protected categoryService: CategoryService,
+    private breakPointObsever: BreakpointObserver
   ) {
     this.account = localStorage.retrieve('user');
+    this.gtMd = this.breakPointObsever.observe('(max-width: 959px)').pipe(map(result => !result.matches));
+    this.gtMd.subscribe(value => {
+      if (!value) {
+        this.displayedColumns = ['description', 'formActions'];
+      } else {
+        this.displayedColumns = ['createdDate', 'controlNumber', 'name', 'description', 'status', 'category', 'formActions'];
+      }
+    });
   }
 
   loadPage(page?: number, dontNavigate?: boolean): void {

@@ -1,11 +1,11 @@
 <div>
-    <h2 id="page-heading">
+    <h2 id="page-heading" fxLayout="row">
         <span jhiTranslate="whistleBlowerApp.category.home.title">Categories</span>
-
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-category" [routerLink]="['/category/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="whistleBlowerApp.category.home.createLabel">
-            Create a new Category
+        <span class="spacer"></span>
+        <button mat-raised-button color="primary"
+            [routerLink]="['/category/new']">
+            <span>
+                Create
             </span>
         </button>
     </h2>
@@ -18,46 +18,29 @@
         <span jhiTranslate="whistleBlowerApp.category.home.notFound">No categories found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="categories && categories.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <!-- <th scope="col" ><span jhiTranslate="whistleBlowerApp.category.code">Code</span></th> -->
-                    <th scope="col" ><span jhiTranslate="whistleBlowerApp.category.name">Name</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let category of categories ;trackBy: trackId">
-                    <td><a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a></td>
-                    <!-- <td>{{ category.code }}</td> -->
-                    <td>{{ category.name }}</td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/category', category.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
+    <table mat-table [dataSource]="categories" matSort *ngIf="!!categories?.length">
 
-                            <button type="submit"
-                                    [routerLink]="['/category', category.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
 
-                            <button type="submit" (click)="delete(category)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <ng-container matColumnDef="formActions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let category" style="width: 1%;">
+                <div fxLayout="row">
+                    <button mat-icon-button type="submit" [routerLink]="['/category', category.id, 'edit']">
+                        <mat-icon color='primary'>edit</mat-icon>
+                    </button>
+
+                    <button mat-icon-button (click)="delete(category)" >
+                        <mat-icon color='warn'>delete</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row class="data-row" *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
 </div>
