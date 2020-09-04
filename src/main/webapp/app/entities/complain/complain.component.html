@@ -3,9 +3,47 @@
     <span jhiTranslate="whistleBlowerApp.complain.home.title">Complains</span>
   </h2>
 
-  <bmf-alert-error></bmf-alert-error>
+  <!-- <bmf-alert-error></bmf-alert-error>
 
-  <bmf-alert></bmf-alert>
+  <bmf-alert></bmf-alert> -->
+  <div style="margin-bottom: 10px;">
+    <mat-accordion>
+      <mat-expansion-panel #fil [expanded]="false" (opened)="expanded === !expanded">
+        <mat-expansion-panel-header>
+          <span>Filters</span> 
+        </mat-expansion-panel-header>
+        <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column"
+           fxLayoutGap="10px" fxLayoutAlign="start center">
+          <mat-form-field class="full-width">
+            <mat-label>
+              Category
+            </mat-label>
+            <mat-select [(ngModel)]="filter['categoryId.equals']">
+              <mat-option [value]='c.id' *ngFor="let c of categories">
+                {{c.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>
+              Status
+            </mat-label>
+             <mat-select [(ngModel)]="filter['status.equals']">
+              <mat-option value="PENDING">Pending</mat-option>
+              <mat-option value="ON_PROGRESS">On Progress</mat-option>
+              <mat-option value="CLOSED">Closed</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button fxFlex="70px" mat-raised-button (click)="search(); fil.close()" color="primary">
+            Seach
+          </button>
+          <button fxFlex="100px" mat-button (click)="clearFilter(); fil.close()" color="primary">
+            Clear Filter
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 
   <div *ngIf="!complains?.length">
     <span class="table-overlay">No records found</span>
@@ -38,7 +76,7 @@
 
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let element">
+      <td mat-cell *matCellDef="let element" style="width:1%">
         <mat-chip-list color="primary">
           <mat-chip color="primary">{{ element.status }}</mat-chip>
         </mat-chip-list>
@@ -47,7 +85,7 @@
 
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef>Category</th>
-      <td mat-cell *matCellDef="let element">
+      <td mat-cell *matCellDef="let element" style="width:1%">
         <mat-chip-list color="primary">
           <mat-chip color="primary">{{ element.categoryName }}</mat-chip>
         </mat-chip-list>
@@ -56,7 +94,7 @@
 
     <ng-container matColumnDef="formActions">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
+      <td mat-cell *matCellDef="let element" style="width:1%">
         <div fxLayout="row">
           <button [routerLink]="['/complain', element.id, 'view']" color="primary" aria-label="Open Complain"
             mat-icon-button>
@@ -70,76 +108,7 @@
     <tr mat-row class="data-row" *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <!-- <div class="alert alert-warning" id="no-result" *ngIf="complains?.length === 0">
-        <span jhiTranslate="whistleBlowerApp.complain.home.notFound">No complains found</span>
-    </div> -->
-
-  <!-- <div class="table-responsive" id="entities" *ngIf="complains && complains.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="whistleBlowerApp.complain.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="position"><span jhiTranslate="whistleBlowerApp.complain.position">Position</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="organisation"><span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="email"><span jhiTranslate="whistleBlowerApp.complain.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="controlNumber"><span jhiTranslate="whistleBlowerApp.complain.controlNumber">Control Number</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="whistleBlowerApp.complain.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="categoryName"><span jhiTranslate="whistleBlowerApp.complain.category">Category</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let complain of complains ;trackBy: trackId">
-                    <td><a [routerLink]="['/complain', complain.id, 'view']">{{ complain.id }}</a></td>
-                    <td>{{ complain.name }}</td>
-                    <td>{{ complain.position }}</td>
-                    <td>{{ complain.organisation }}</td>
-                    <td>{{ complain.email }}</td>
-                    <td>{{ complain.phoneNumber }}</td>
-                    <td>{{ complain.controlNumber }}</td>
-                    <td>{{ complain.description }}</td>
-                    <td>
-                        <div *ngIf="complain.categoryId">
-                            <a [routerLink]="['/category', complain.categoryId , 'view']" >{{ complain.categoryName }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/complain', complain.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-
-                            <button type="submit"
-                                    [routerLink]="['/complain', complain.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-
-                            <button type="submit" (click)="delete(complain)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div *ngIf="complains && complains.length > 0">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
-        </div>
-    </div> -->
+  <mat-paginator [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChange($event)">
+  </mat-paginator>
 </div>

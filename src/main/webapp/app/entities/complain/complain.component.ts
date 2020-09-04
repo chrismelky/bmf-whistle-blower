@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
+import { Subscription, combineLatest, Observable } from 'rxjs';
 import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,6 +11,11 @@ import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ComplainService } from './complain.service';
 import { ComplainDeleteDialogComponent } from './complain-delete-dialog.component';
 import { LocalStorageService } from 'ngx-webstorage';
+import { PageEvent } from '@angular/material/paginator';
+import { CategoryService } from '../category/category.service';
+import { ICategory } from 'app/shared/model/category.model';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'bmf-complain',
@@ -22,11 +27,16 @@ export class ComplainComponent implements OnInit, OnDestroy {
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
   page!: number;
+  pageSizeOptions: number[] = [5, 10, 20, 50, 100];
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
   account: Account | null = null;
   displayedColumns = ['createdDate', 'controlNumber', 'name', 'description', 'status', 'category', 'formActions'];
+  filter: any = {};
+  categories: ICategory[] = [];
+  expanded = false;
+  gtMd!: Observable<boolean>;
 
   constructor(
     protected complainService: ComplainService,
@@ -35,9 +45,19 @@ export class ComplainComponent implements OnInit, OnDestroy {
     protected router: Router,
     protected eventManager: JhiEventManager,
     protected localStorage: LocalStorageService,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected categoryService: CategoryService,
+    private breakPointObsever: BreakpointObserver
   ) {
     this.account = localStorage.retrieve('user');
+    this.gtMd = this.breakPointObsever.observe('(max-width: 959px)').pipe(map(result => !result.matches));
+    this.gtMd.subscribe(value => {
+      if (!value) {
+        this.displayedColumns = ['description', 'formActions'];
+      } else {
+        this.displayedColumns = ['createdDate', 'controlNumber', 'name', 'description', 'status', 'category', 'formActions'];
+      }
+    });
   }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
@@ -49,6 +69,7 @@ export class ComplainComponent implements OnInit, OnDestroy {
     this.complainService
       .query({
         'receiversId.equals': this.account.id,
+        ...this.filter,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -62,6 +83,16 @@ export class ComplainComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.handleNavigation();
     this.registerChangeInComplains();
+    this.categoryService.query().subscribe((res: HttpResponse<ICategory[]>) => (this.categories = res.body || []));
+  }
+
+  clearFilter(): void {
+    this.filter = {};
+    this.loadPage(0);
+  }
+
+  search(): void {
+    this.loadPage(0);
   }
 
   protected handleNavigation(): void {
@@ -105,6 +136,12 @@ export class ComplainComponent implements OnInit, OnDestroy {
   delete(complain: IComplain): void {
     const modalRef = this.modalService.open(ComplainDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.complain = complain;
+  }
+
+  pageChange($event: PageEvent): void {
+    this.itemsPerPage = $event.pageSize;
+    this.page = $event.pageIndex;
+    this.loadPage(this.page, false);
   }
 
   sort(): string[] {

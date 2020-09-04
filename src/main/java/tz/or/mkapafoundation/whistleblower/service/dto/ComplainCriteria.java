@@ -6,6 +6,7 @@ import io.github.jhipster.service.Criteria;
 import io.github.jhipster.service.filter.Filter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
+import tz.or.mkapafoundation.whistleblower.domain.ComplainStatus;
 
 /**
  * Criteria class for the {@link tz.or.mkapafoundation.whistleblower.domain.Complain} entity. This class is used
@@ -18,6 +19,22 @@ import io.github.jhipster.service.filter.StringFilter;
  */
 public class ComplainCriteria implements Serializable, Criteria {
 
+    public static class StatusFilter extends Filter<ComplainStatus> {
+
+        public StatusFilter() {
+        }
+
+        public StatusFilter(StatusFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public StatusFilter copy() {
+            return new StatusFilter(this);
+        }
+
+    }
+
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;
@@ -29,6 +46,8 @@ public class ComplainCriteria implements Serializable, Criteria {
     private StringFilter organisation;
 
     private StringFilter email;
+
+    private StatusFilter status;
 
     private StringFilter phoneNumber;
 
@@ -53,6 +72,7 @@ public class ComplainCriteria implements Serializable, Criteria {
         this.position = other.position == null ? null : other.position.copy();
         this.organisation = other.organisation == null ? null : other.organisation.copy();
         this.email = other.email == null ? null : other.email.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.phoneNumber = other.phoneNumber == null ? null : other.phoneNumber.copy();
         this.controlNumber = other.controlNumber == null ? null : other.controlNumber.copy();
         this.witnessesId = other.witnessesId == null ? null : other.witnessesId.copy();
@@ -163,6 +183,8 @@ public class ComplainCriteria implements Serializable, Criteria {
         this.receiversId = receiversId;
     }
 
+    
+
 
     @Override
     public boolean equals(Object o) {
@@ -215,6 +237,7 @@ public class ComplainCriteria implements Serializable, Criteria {
                 (position != null ? "position=" + position + ", " : "") +
                 (organisation != null ? "organisation=" + organisation + ", " : "") +
                 (email != null ? "email=" + email + ", " : "") +
+                (status != null ? "status=" + status + ", " : "") +
                 (phoneNumber != null ? "phoneNumber=" + phoneNumber + ", " : "") +
                 (controlNumber != null ? "controlNumber=" + controlNumber + ", " : "") +
                 (witnessesId != null ? "witnessesId=" + witnessesId + ", " : "") +
@@ -224,5 +247,15 @@ public class ComplainCriteria implements Serializable, Criteria {
                 (receiversId != null ? "receiversId=" + receiversId + ", " : "") +
             "}";
     }
+
+    public StatusFilter getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusFilter status) {
+        this.status = status;
+    }
+
+   
 
 }

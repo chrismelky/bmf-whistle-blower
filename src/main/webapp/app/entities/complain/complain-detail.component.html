@@ -1,5 +1,5 @@
-<div fxLayout="row" style="width: 100%;">
-    <div fxFlex="60%" style="border-right: 1px solid rgba(0, 0, 0, 0.12);padding:10px">
+<div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column" style="width: 100%;">
+    <div fxFlex.gt-md="60%" style="border-right: 1px solid rgba(0, 0, 0, 0.12);padding:10px">
         <mat-button-toggle-group #status="matButtonToggleGroup" color="primary" style="margin-bottom: 10px;" 
         (change)="changeStatus(status.value)"> 
             <mat-button-toggle [checked]="complain?.status === 'PENDING'" value="PENDING">Pending</mat-button-toggle>
@@ -20,7 +20,7 @@
                     <mat-label>Description</mat-label>
                     <textarea disabled matInput [value]="complain?.description"></textarea>
                 </mat-form-field>
-                <div fxLayout="row" fxLayoutGap="5px">
+                <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column" fxLayoutGap="5px">
                 
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Name</mat-label>
@@ -35,7 +35,7 @@
                         <input disabled matInput [value]="complain?.organisation" />
                     </mat-form-field>
                 </div>
-                <div fxLayout="row" fxLayoutGap="5px">
+                <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column" fxLayoutGap="5px">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Email</mat-label>
                         <input disabled matInput [value]="complain?.email" />
@@ -67,7 +67,7 @@
                 </mat-expansion-panel-header>
                 <mat-list>
                     <mat-list-item *ngFor="let s of complain?.suspects;let i=index">
-                        <div fxLayout="row" class="full-width">
+                        <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column" class="full-width">
                             <div fxFlex="20px">{{i+1}}</div>
                             <div fxFlex>
                                 <span>{{s.name}}</span>
@@ -92,7 +92,7 @@
                 </mat-expansion-panel-header>
                 <mat-list>
                     <mat-list-item *ngFor="let w of complain?.witnesses;let i=index">
-                        <div fxLayout="row" class="full-width">
+                        <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column" class="full-width">
                             <div fxFlex="20px">{{i+1}}</div>
                             <div fxFlex>
                                 <span>{{w.name}}</span>
@@ -113,7 +113,7 @@
             </mat-expansion-panel>
         </mat-accordion>
     </div>
-    <div fxFlex="40%" style="padding: 10px;">
+    <div fxFlex.gt-md="40%" style="padding: 10px;">
         <div fxLayout="row" style="width: 100%;">
             <mat-label>Comments</mat-label>
             <span class="spacer"></span>

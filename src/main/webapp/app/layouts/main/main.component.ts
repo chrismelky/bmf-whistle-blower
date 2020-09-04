@@ -1,4 +1,4 @@
-import { Component, OnInit, RendererFactory2, Renderer2 } from '@angular/core';
+import { Component, OnInit, RendererFactory2, Renderer2, ViewChild, TemplateRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -13,6 +13,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ComplainStatusComponent } from 'app/entities/complain/complain-status.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'bmf-main',
@@ -23,6 +26,12 @@ export class MainComponent implements OnInit {
   account: Account | null = null;
   totalComplains = '0';
   inProduction: boolean | undefined = false;
+  isSearchBar = false;
+  @ViewChild('searchBar')
+  searchBar!: TemplateRef<any>;
+  dialogRef: any;
+  gtMd!: Observable<boolean>;
+  isGtMd = true;
 
   constructor(
     private accountService: AccountService,
@@ -35,9 +44,14 @@ export class MainComponent implements OnInit {
     private complainService: ComplainService,
     private profileService: ProfileService,
     private dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private breakPointObsever: BreakpointObserver
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
+    this.gtMd = this.breakPointObsever.observe('(max-width: 959px)').pipe(map(result => !result.matches));
+    this.gtMd.subscribe(value => {
+      this.isGtMd = value;
+    });
   }
 
   ngOnInit(): void {
@@ -81,7 +95,7 @@ export class MainComponent implements OnInit {
         },
         (error: HttpErrorResponse) => {
           if (error.status === 404) {
-            this.toastr.warning(`No Complain found with token ${search}`, 'Not found', { timeOut: 5000 });
+            this.toastr.warning(`No Complain found with token ${search}`, 'Not found', { timeOut: 3000 });
           }
         }
       );
@@ -98,6 +112,22 @@ export class MainComponent implements OnInit {
       });
   }
 
+  openSeachBar(): void {
+    this.dialogRef = this.dialog.open(this.searchBar, {
+      position: {
+        top: '0px',
+      },
+      width: '100%',
+      hasBackdrop: true,
+      id: 'searchBar',
+      panelClass: 'searchBarPanel',
+      backdropClass: 'searchBarBackdrop',
+    });
+    this.dialogRef.afterClosed().subscribe(() => {});
+  }
+  closeSearchBar(): void {
+    this.dialogRef.close();
+  }
   private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {
     let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : '';
     if (routeSnapshot.firstChild) {

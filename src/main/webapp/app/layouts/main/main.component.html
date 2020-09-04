@@ -1,123 +1,162 @@
-<!-- <bmf-page-ribbon></bmf-page-ribbon> -->
-
-<mat-toolbar class="mat-elevation-z2">
-    <button mat-icon-button (click)="drawer.toggle()" *ngIf="isAuthenticated()">
-        <mat-icon >menu</mat-icon>
-    </button>
-    <a style="color: white;">
-        <span class="logo-img"></span>
-        <span  style="font-weight: 400; color: rgb(95, 99, 104);font-family: 'Product Sans', Arial, Helvetica, sans-serif;">Whistle Blower</span>
-    </a>
-    <span class="spacer"></span>
-    <div class="input-group" style="width: 300px;">
-        <input #search type="text" class="form-control" 
-        style="height: auto; border-radius: 4px 0 0 4px;"
-        placeholder="Ticket Number" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append" style="border: 1px solid #ced4da;border-radius: 0 4px 4px 0;">
-          <button mat-icon-button (click)="openStatusDialog(search.value)">
-              <mat-icon>search</mat-icon>
-          </button>
-        </div>
-      </div>
-    <button type="button" mat-button routerLink="/">
-        <mat-icon>home</mat-icon>
-        <span>Home</span>
-    </button>
-    <button type="button" mat-button [matMenuTriggerFor]="appsMenu">
-        <mat-icon>apps</mat-icon>
-    </button>
-    <mat-menu #appsMenu>
-        <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
-            
-            <div style="width: 80px; height: 80px;padding: 10px">
-                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" href="http://161.35.127.196:9080">
-                    <mat-icon style="font-size: 30px; color:#3f51b5;">person</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">User Managment</span>
-                </a>
-            </div>
-            <div style="width: 80px; height: 80px;padding: 10px">
-                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center" target="_blank" 
-                [href]="(inProduction) ? 'http://161.35.127.196': 'http://localhost'">
-                    <mat-icon style="font-size: 30px; color:#3f51b5;">person</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">Bmf Account</span>
-                </a>
-            </div>
-
-            <div style="width: 80px; height: 80px;padding: 10px">
-                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
-                    <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: center;">M&E System</span>
-                </a>
-            </div>
-            
-        </div>
-        <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
-            <div style="width: 80px; height: 80px;padding: 10px">
-                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
-                    <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: center;">CHAID</span>
-                </a>
-            </div>
-            <div style="width: 80px; height: 80px;padding: 10px">
-                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
-                    <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">HRHIS</span>
-                </a>
-            </div>
-            <div style="width: 80px; height: 80px;padding: 10px">
-                <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
-                    <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
-                    <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">OPA</span>
-                </a>
-            </div>
-           
-        </div>
-    </mat-menu>
-    <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()">
-        <ngx-avatar [name]="account?.firstName! || account?.login!" bgColor="#3f51b5"></ngx-avatar>
-    </button>
-    <mat-menu #accMenu>
-        <div style="padding: 10px 20px;">
-            <span>{{account?.firstName}} {{account?.lastName}}</span>
-        </div>
-        <mat-divider></mat-divider>
-        <button mat-menu-item (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>
-            <span>Logout</span>
+<!-- Search Bar for small devices -->
+<ng-template #searchBar>
+    <mat-toolbar fxShow fxHide.md="true" fxHide.gt-md="true">
+        <button mat-icon-button fxShow fxHide.gt-md="true" fxHide.md="true" (click)="closeSearchBar()">
+            <mat-icon color="primary">arrow_back</mat-icon>
         </button>
-    </mat-menu>
-    <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()">
-        <mat-icon>login</mat-icon>
-        <span>Sign In</span>
-    </button>
-   
-</mat-toolbar>
-<mat-drawer-container style="margin-top: 4px;" full>
-    <mat-drawer #drawer [mode]="'side'" style="width: 200px;" >
-        <mat-nav-list style="padding:20px 20px 0 0">
-            <mat-list-item *bmfHasAnyAuthority="'ROLE_ADMIN'" routerLink="/category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <div class="input-group" style="width: 100%;">
+            <input #search type="text" class="form-control"
+                style="height: auto; border:none; border-bottom: 1px solid #ced4da" placeholder="Ticket Number"
+                aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button mat-icon-button (click)="openStatusDialog(search.value)">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-toolbar>
+</ng-template>
+
+<mat-drawer-container>
+    <mat-drawer #drawer [mode]=" isGtMd ? 'side': 'over'" style="width: 200px;">
+        <mat-toolbar class="mat-elevation-z2">
+            <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()" fxShow fxHide.gt-md="true">
+                <mat-icon>login</mat-icon>
+                <span>Sign In</span>
+            </button>
+            <div xShow fxHide.gt-md="true" fxHide.md="true" fxLayout="row" fxLayoutAlign="start center">
+                <ngx-avatar f [name]="account?.firstName! || account?.login!" bgColor="#3f51b5"></ngx-avatar>
+                <span style="font-size:60%; margin-left: 10px; font-weight: normal; font-size: 14px;">{{account?.firstName}} {{account?.lastName}}</span>
+            </div>
+        </mat-toolbar>
+        <mat-nav-list style="padding:20px 20px 0 0" *ngIf="isAuthenticated()">
+            <mat-list-item *bmfHasAnyAuthority="'ROLE_ADMIN'" routerLink="/category" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" (click)="drawer.close()">
                 <mat-icon>category</mat-icon>
                 <span>Categories</span>
             </mat-list-item>
-            <mat-list-item *bmfHasAnyAuthority="'ROLE_CEO','ROLE_BOARD_CHAIR'" routerLink="/complain" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-list-item *bmfHasAnyAuthority="'ROLE_CEO','ROLE_BOARD_CHAIR'" routerLink="/complain"
+                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="drawer.close()">
                 <mat-icon>campaign</mat-icon>
-                <span [matBadge]="totalComplains" matBadgeColor="accent"
-                [matBadgeOverlap]='false'>Complians</span>
+                <span [matBadge]="totalComplains" matBadgeColor="accent" [matBadgeOverlap]='false'>Complians</span>
             </mat-list-item>
 
         </mat-nav-list>
+        <span class="spacer"></span>
+        <button mat-menu-item (click)="logout()" *ngIf="isAuthenticated()" fxShow fxHide.gt-md="true">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+        </button>
     </mat-drawer>
-    <mat-drawer-content>
-        <div>
-            <!-- <router-outlet name="navbar"></router-outlet> -->
-        </div>
+    <mat-drawer-content style="flex: 1 1 auto">
+        <mat-toolbar class="mat-elevation-z2">
+            <button mat-icon-button (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <a routerLink="/" style="color: white;" >
+                <span class="logo-img" fxShow fxHide.xs="true"></span>
+                <span
+                    style="font-size: 70%; font-weight: 400; color: rgb(95, 99, 104);font-family: 'Product Sans', Arial, Helvetica, sans-serif;">Whistle
+                    Blower</span>
+            </a>
+            <span class="spacer"></span>
+            
+            <div class="input-group" style="width: 50%;" fxShow fxHide.lt-md="true">
+                <input #search type="text" class="form-control" style="font-size: 0.8rem; height: auto; border-radius: 4px 0 0 4px;"
+                    placeholder="Ticket Number" aria-label="Complain token" aria-describedby="basic-addon2">
+                <div class="input-group-append" style="border: 1px solid #ced4da;border-radius: 0 4px 4px 0;">
+                    <button mat-icon-button (click)="openStatusDialog(search.value)">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <span class="spacer"></span>
+            <button mat-icon-button fxShow fxHide.gt-md="true" fxHide.md="true" (click)="openSeachBar()">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button type="button" mat-icon-button routerLink="/" >
+                <mat-icon>home</mat-icon>
+            </button>
+            <button type="button" mat-icon-button [matMenuTriggerFor]="appsMenu">
+                <mat-icon>apps</mat-icon>
+            </button>
+            <mat-menu #appsMenu fxShow fxHide.lt-md="true">
+                <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
 
+                    <div style="width: 80px; height: 80px;padding: 10px">
+                        <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center"
+                            target="_blank" href="http://161.35.127.196:9080">
+                            <mat-icon style="font-size: 30px; color:#3f51b5;">person</mat-icon>
+                            <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">User
+                                Managment</span>
+                        </a>
+                    </div>
+                    <div style="width: 80px; height: 80px;padding: 10px">
+                        <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center"
+                            target="_blank" [href]="(inProduction) ? 'http://161.35.127.196': 'http://localhost'">
+                            <mat-icon style="font-size: 30px; color:#3f51b5;">person</mat-icon>
+                            <span style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">Bmf
+                                Account</span>
+                        </a>
+                    </div>
+
+                    <div style="width: 80px; height: 80px;padding: 10px">
+                        <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+                            <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
+                            <span style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: center;">M&E
+                                System</span>
+                        </a>
+                    </div>
+
+                </div>
+                <div fxLayout="row" fxLayoutGap="4" style="padding: 10px;">
+                    <div style="width: 80px; height: 80px;padding: 10px">
+                        <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+                            <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
+                            <span
+                                style="font-size: 11px;text-decoration: none;margin-top:4px;text-align: center;">CHAID</span>
+                        </a>
+                    </div>
+                    <div style="width: 80px; height: 80px;padding: 10px">
+                        <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+                            <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
+                            <span
+                                style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">HRHIS</span>
+                        </a>
+                    </div>
+                    <div style="width: 80px; height: 80px;padding: 10px">
+                        <a style="text-align: justify;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+                            <mat-icon style="font-size: 30px; color:#3f51b5;">launch</mat-icon>
+                            <span
+                                style="font-size: 11px;text-decoration: none;text-align: center;margin-top:4px">OPA</span>
+                        </a>
+                    </div>
+
+                </div>
+            </mat-menu>
+            <button [matMenuTriggerFor]="accMenu" type="button" mat-button *ngIf="isAuthenticated()" fxShow
+                fxHide.lt-md="true">
+                <ngx-avatar [name]="account?.firstName! || account?.login!" bgColor="#3f51b5"></ngx-avatar>
+            </button>
+            <mat-menu #accMenu fxShow fxHide.lt-md="true">
+                <div style="padding: 10px 20px;">
+                    <span>{{account?.firstName}} {{account?.lastName}}</span>
+                </div>
+                <mat-divider></mat-divider>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                </button>
+            </mat-menu>
+            <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()" fxShow fxHide.lt-md="true">
+                <mat-icon>login</mat-icon>
+                <span>Sign In</span>
+            </button>
+        </mat-toolbar>
         <div class="container-fluid">
             <div class="card jh-card">
                 <router-outlet></router-outlet>
             </div>
-
-            <!-- <bmf-footer></bmf-footer> -->
         </div>
     </mat-drawer-content>
 </mat-drawer-container>

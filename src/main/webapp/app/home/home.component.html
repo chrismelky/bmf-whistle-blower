@@ -1,20 +1,22 @@
-<div class="row">
-    <div class="col-md-3">
+<div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column">
+    <div  fxFlex.gt-md="30%" fxShow fxHide.lt-md="true" fxHide.md="true">
         <span class="hipster img-fluid rounded"></span>
-        <!-- <mat-icon style="font-size: 80%;margin: auto; color:#5f6368;">campaign</mat-icon> -->
-        <!-- <image src="content/images/campaign-black-48dp.svg" ></image> -->
     </div>
 
-    <div class="col-md-9">
+    <div fxFlex fxFlex.gt-md="70%" >
         <h1 class="display-4" jhiTranslate="home.title">Welcome, Whistle Blower Secured Application!</h1>
 
         <p class="lead">
             Welcome to the Benjamin William Mkapa Foundation secured Whistle Blower system where you can leave a confidential message for the management to take appropriate action. Feel free to report your concern, BMF management will ensure the information is kept confidential.
         </p>
         <div fxLayout="row" fxLayoutGap="10px">
-            <button type="button" color="primary" mat-raised-button routerLink="/complain/new">
+            <button fxShow fxHide.lt-md='true' fxHide.md='true' type="button" color="primary" mat-raised-button routerLink="/complain/new">
                 <mat-icon>campaign</mat-icon>
                 <span>Submit Complain</span>
+            </button>
+            <button fxShow  fxHide.gt-md='true' routerLink="/complain/new"   color="primary" 
+                   style="position: fixed; right: 20px; bottom: 20px;left: auto;" mat-fab aria-label="Submit Complain" >
+                <mat-icon>campaign1</mat-icon>
             </button>
         </div>
        

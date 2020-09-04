@@ -61,7 +61,17 @@ public class CommentResource {
         }
         if (principal instanceof AbstractAuthenticationToken) {
             UserDTO user = userService.getUserFromAuthentication((AbstractAuthenticationToken) principal);
-            String name = (user != null) ? user.getFirstName().concat(" ").concat(user.getLastName()) : "anonomous";
+            String name = "";
+            if (user != null) {
+                if (user.getFirstName() != null) {
+                    name.concat(user.getFirstName()).concat(" ");
+                } 
+                if (user.getLastName() != null) {
+                    name.concat(user.getLastName());
+                }
+            } else {
+                name = "anonimous";
+            }
             commentDTO.setUser(name);
         }
         CommentDTO result = commentService.save(commentDTO);
