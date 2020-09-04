@@ -4,7 +4,7 @@
     <button mat-icon-button (click)="drawer.toggle()" *ngIf="isAuthenticated()">
         <mat-icon >menu</mat-icon>
     </button>
-    <a routerLink="/" style="color: white;">
+    <a style="color: white;">
         <span class="logo-img"></span>
         <span  style="font-weight: 400; color: rgb(95, 99, 104);font-family: 'Product Sans', Arial, Helvetica, sans-serif;">Whistle Blower</span>
     </a>
@@ -12,7 +12,7 @@
     <div class="input-group" style="width: 300px;">
         <input #search type="text" class="form-control" 
         style="height: auto; border-radius: 4px 0 0 4px;"
-        placeholder="Complain token" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        placeholder="Ticket Number" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append" style="border: 1px solid #ced4da;border-radius: 0 4px 4px 0;">
           <button mat-icon-button (click)="openStatusDialog(search.value)">
               <mat-icon>search</mat-icon>
