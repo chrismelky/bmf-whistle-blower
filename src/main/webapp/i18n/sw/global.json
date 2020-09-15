@@ -3,7 +3,7 @@
     "title": "WhistleBlower",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "search": {
-      "ticket-number": "Ticket Number"
+      "ticket-number": "Ingiza Nambari ya ticket"
     },
     "menu": {
       "home": "Home",
@@ -24,8 +24,8 @@
         "settings": "Settings",
         "password": "Password",
         "sessions": "Sessions",
-        "login": "Sign in",
-        "logout": "Sign out",
+        "login": "Ingia",
+        "logout": "Toka",
         "register": "Register"
       },
       "admin": {

@@ -6,13 +6,13 @@
     <div fxFlex fxFlex.gt-md="70%" >
         <h1 class="display-4" jhiTranslate="home.title">Welcome, Whistle Blower Secured Application!</h1>
 
-        <p class="lead">
+        <p class="lead" jhiTranslate="home.welcome">
             Welcome to the Benjamin William Mkapa Foundation secured Whistle Blower system where you can leave a confidential message for the management to take appropriate action. Feel free to report your concern, BMF management will ensure the information is kept confidential.
         </p>
         <div fxLayout="row" fxLayoutGap="10px">
             <button fxShow fxHide.lt-md='true' fxHide.md='true' type="button" color="primary" mat-raised-button routerLink="/complain/new">
                 <mat-icon>campaign</mat-icon>
-                <span>Submit Complain</span>
+                <span jhiTranslate="home.submit">Submit Complain</span>
             </button>
             <button fxShow  fxHide.gt-md='true' routerLink="/complain/new"   color="primary" 
                    style="position: fixed; right: 20px; bottom: 20px;left: auto;" mat-fab aria-label="Submit Complain" >

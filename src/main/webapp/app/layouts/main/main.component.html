@@ -63,7 +63,7 @@
             
             <div class="input-group" style="width: 50%;" fxShow fxHide.lt-md="true">
                 <input #search type="text" class="form-control" style="font-size: 0.8rem; height: auto; border-radius: 4px 0 0 4px;"
-                    placeholder="Ticket Number" aria-label="Complain token" aria-describedby="basic-addon2">
+                    placeholder="{{'global.search.ticket-number' | translate}}" aria-label="Complain token" aria-describedby="basic-addon2">
                 <div class="input-group-append" style="border: 1px solid #ced4da;border-radius: 0 4px 4px 0;">
                     <button mat-icon-button (click)="openStatusDialog(search.value)">
                         <mat-icon>search</mat-icon>
@@ -74,6 +74,14 @@
             <button mat-icon-button fxShow fxHide.gt-md="true" fxHide.md="true" (click)="openSeachBar()">
                 <mat-icon>search</mat-icon>
             </button>
+            <button type="button" mat-button [matMenuTriggerFor]="langMenu">
+                <span>{{languageService.currentLang | findLanguageFromKey}}</span>
+            </button>
+            <mat-menu #langMenu>
+                <button mat-menu-item (click)="changeLanguage(language)" *ngFor="let language of languages">
+                    <span>{{language | findLanguageFromKey}}</span>
+                </button>
+            </mat-menu>
             <button type="button" mat-icon-button routerLink="/" >
                 <mat-icon>home</mat-icon>
             </button>
@@ -145,12 +153,12 @@
                 <mat-divider></mat-divider>
                 <button mat-menu-item (click)="logout()">
                     <mat-icon>exit_to_app</mat-icon>
-                    <span>Logout</span>
+                    <span jhiTranslate="global.menu.account.logout">Logout</span>
                 </button>
             </mat-menu>
             <button (click)="login()" type="button" mat-button *ngIf="!isAuthenticated()" fxShow fxHide.lt-md="true">
                 <mat-icon>login</mat-icon>
-                <span>Sign In</span>
+                <span jhiTranslate="global.menu.account.login">Sign In</span>
             </button>
         </mat-toolbar>
         <div class="container-fluid">

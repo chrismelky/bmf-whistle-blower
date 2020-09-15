@@ -5,7 +5,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/core/login/login.service';
-import { LocalStorageService } from 'ngx-webstorage';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { Account } from 'app/core/user/account.model';
 import { ComplainService } from 'app/entities/complain/complain.service';
 import { ProfileService } from '../profiles/profile.service';
@@ -16,6 +16,8 @@ import { ToastrService } from 'ngx-toastr';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LANGUAGES } from 'app/core/language/language.constants';
+import { JhiLanguageService } from 'ng-jhipster';
 
 @Component({
   selector: 'bmf-main',
@@ -32,6 +34,7 @@ export class MainComponent implements OnInit {
   dialogRef: any;
   gtMd!: Observable<boolean>;
   isGtMd = true;
+  languages = LANGUAGES;
 
   constructor(
     private accountService: AccountService,
@@ -41,6 +44,8 @@ export class MainComponent implements OnInit {
     private localStorage: LocalStorageService,
     rootRenderer: RendererFactory2,
     private loginService: LoginService,
+    public languageService: JhiLanguageService,
+    private sessionStorage: SessionStorageService,
     private complainService: ComplainService,
     private profileService: ProfileService,
     private dialog: MatDialog,
@@ -80,6 +85,11 @@ export class MainComponent implements OnInit {
 
       this.renderer.setAttribute(document.querySelector('html'), 'lang', langChangeEvent.lang);
     });
+  }
+
+  changeLanguage(languageKey: string): void {
+    this.sessionStorage.store('locale', languageKey);
+    this.languageService.changeLanguage(languageKey);
   }
 
   openStatusDialog(search?: string): void {

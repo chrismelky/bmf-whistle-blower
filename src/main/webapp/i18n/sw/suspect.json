@@ -1,0 +1,27 @@
+{
+  "whistleBlowerApp": {
+    "suspect": {
+      "home": {
+        "title": "Suspects",
+        "createLabel": "Create a new Suspect",
+        "createOrEditLabel": "Create or edit a Suspect",
+        "notFound": "No Suspects found"
+      },
+      "created": "A new Suspect is created with identifier {{ param }}",
+      "updated": "A Suspect is updated with identifier {{ param }}",
+      "deleted": "A Suspect is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Suspect {{ id }}?"
+      },
+      "detail": {
+        "title": "Suspect"
+      },
+      "name": "Name",
+      "position": "Position",
+      "organisation": "Organisation",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "complain": "Complain"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "whistleBlowerApp": {
+    "complain": {
+      "home": {
+        "title": "Complains",
+        "createLabel": "Create a new Complain",
+        "createOrEditLabel": "Submit a Complain",
+        "notFound": "No Complains found"
+      },
+      "created": "A new Complain is created with identifier {{ param }}",
+      "updated": "A Complain is updated with identifier {{ param }}",
+      "deleted": "A Complain is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Complain {{ id }}?"
+      },
+      "detail": {
+        "title": "Complain"
+      },
+      "name": "Name",
+      "position": "Position",
+      "organisation": "Organisation",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "controlNumber": "Control Number",
+      "description": "Description",
+      "witnesses": "Witnesses",
+      "suspects": "Suspects",
+      "attachments": "Attachments",
+      "category": "Category",
+      "receivers": "Receivers"
+    }
+  }
+}
