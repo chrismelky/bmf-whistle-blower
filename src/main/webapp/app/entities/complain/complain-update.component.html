@@ -27,7 +27,10 @@
         <form [formGroup]="complainForm" (ngSubmit)="save()">
             <mat-horizontal-stepper [linear]="true" #stepper fxShow fxHide.lt-md="true" fxHide.md="true">
                 <mat-step [stepControl]="complainForm.get('categoryId')! && complainForm.get('description')!">
-                    <ng-template matStepLabel>Complain Information</ng-template>
+                    <ng-template matStepLabel>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.complain.info"></span>
+
+                    </ng-template>
                     <div fxLayout="row">
                         <div fxFlex fxLayout="column">
                             <mat-form-field class="full-width" appearance="outline">
@@ -84,7 +87,7 @@
                         </div>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 10px;">
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next
+                        <button type="button" color="primary" mat-raised-button matStepperNext>
                             <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
                         </button>
                     </div>
@@ -133,7 +136,10 @@
                     </div>
                     <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
                         <button type="button" mat-raised-button matStepperPrevious>Back</button>
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
+
+                        </button>
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="suspects" *ngIf="hasSuspect">
@@ -143,7 +149,8 @@
                     <button type="button" mat-button (click)="addSuspect()" color="primary"
                         style="margin-bottom: 20px;">
                         <mat-icon color="primary">add</mat-icon>
-                        <span>Add Suspect</span>
+
+                        <span jhiTranslate="whistleBlowerApp.complain.home.add.suspect"></span>
                     </button>
                     <div formArrayName="suspects" *ngFor="let s of suspects.controls; let i= index">
                         <div [formGroupName]="i" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
@@ -186,18 +193,22 @@
                         </div>
                     </div>
                     <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
-                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                        <button type="button" mat-raised-button matStepperPrevious>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.back"></span>
+                        </button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
+                        </button>
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="witnesses" *ngIf="hasWitness">
-                    <ng-template matStepLabel>Witnesses
+                    <ng-template matStepLabel>
                         <span jhiTranslate="whistleBlowerApp.complain.home.witness"></span>
                     </ng-template>
                     <button type="button" color="primary" mat-button (click)="addWitness()"
                         style="margin-bottom: 20px;">
                         <mat-icon>add</mat-icon>
-                        <span>Add Witness</span>
+                        <span jhiTranslate="whistleBlowerApp.complain.witness"></span>
                     </button>
                     <div formArrayName="witnesses" *ngFor="let s of witnesses.controls; let i= index">
                         <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -241,7 +252,9 @@
                     </div>
                     <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
                         <button type="button" mat-raised-button matStepperPrevious>Back</button>
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
+                        </button>
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="complainForm.get('receivers')!">
@@ -326,7 +339,10 @@
                         </div>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 10px;">
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
+
+                        </button>
                     </div>
                 </mat-step>
                 <mat-step *ngIf="hasPerson">
@@ -371,8 +387,14 @@
 
                     </div>
                     <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
-                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                        <button type="button" mat-raised-button matStepperPrevious>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.back"></span>
+
+                        </button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>
+
+                            <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
+                        </button>
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="suspects" *ngIf="hasSuspect">
@@ -383,7 +405,7 @@
                     <button type="button" mat-button (click)="addSuspect()" color="primary"
                         style="margin-bottom: 20px;">
                         <mat-icon color="primary">add</mat-icon>
-                        <span>Add Suspect</span>
+                        <span jhiTranslate="whistleBlowerApp.complain.suspect"></span>
                     </button>
                     <div formArrayName="suspects" *ngFor="let s of suspects.controls; let i= index">
                         <div [formGroupName]="i" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
@@ -426,8 +448,14 @@
                         </div>
                     </div>
                     <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
-                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                        <button type="button" mat-raised-button matStepperPrevious>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.back"></span>
+
+                        </button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
+
+                        </button>
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="witnesses" *ngIf="hasWitness">
@@ -438,7 +466,7 @@
                     <button type="button" color="primary" mat-button (click)="addWitness()"
                         style="margin-bottom: 20px;">
                         <mat-icon>add</mat-icon>
-                        <span>Add Witness</span>
+                        <span jhiTranslate="whistleBlowerApp.complain.witness"></span>
                     </button>
                     <div formArrayName="witnesses" *ngFor="let s of witnesses.controls; let i= index">
                         <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -481,8 +509,14 @@
                         </div>
                     </div>
                     <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
-                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                        <button type="button" mat-raised-button matStepperPrevious>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.back"></span>
+
+                        </button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
+
+                        </button>
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="complainForm.get('receivers')!">

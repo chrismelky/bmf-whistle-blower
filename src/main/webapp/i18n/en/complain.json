@@ -14,7 +14,9 @@
         "confirmation": "Confirmation",
         "submit": "Submit",
         "attachment": "Add attachment",
-        "next": "Next"
+        "add.suspect": "Add Suspect",
+        "next": "Next",
+        "back": "Nyuma"
 
       },
       "created": "A new Complain is created with identifier {{ param }}",

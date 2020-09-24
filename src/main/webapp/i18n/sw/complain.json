@@ -14,8 +14,9 @@
         "confirmation": "Tuma Taarifa",
         "submit": "Tuma Lalamiko",
         "attachment": "Kiambatanisho",
-        "next": "Mbele"
-
+        "next": "Mbele",
+        "back": "Nyuma",
+        "add.suspect": "Ongeza Mlalamikiwa"
       },
       "created": "A new Complain is created with identifier {{ param }}",
       "updated": "A Complain is updated with identifier {{ param }}",
