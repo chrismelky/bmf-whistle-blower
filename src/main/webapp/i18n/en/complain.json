@@ -5,7 +5,17 @@
         "title": "Complains",
         "createLabel": "Create a new Complain",
         "createOrEditLabel": "Submit a Complain",
-        "notFound": "No Complains found"
+        "notFound": "No Complains found",
+        "optionalMessageLabel": "Optionally select below information",
+        "complainant": "Complainant Personal Information",
+        "suspect": "Suspect Information",
+        "witness": "Witness Information",
+        "complain.info": "Complain Information",
+        "confirmation": "Confirmation",
+        "submit": "Submit",
+        "attachment": "Add attachment",
+        "next": "Next"
+
       },
       "created": "A new Complain is created with identifier {{ param }}",
       "updated": "A Complain is updated with identifier {{ param }}",

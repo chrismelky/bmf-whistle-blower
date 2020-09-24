@@ -4,8 +4,18 @@
       "home": {
         "title": "Complains",
         "createLabel": "Create a new Complain",
-        "createOrEditLabel": "Submit a Complain",
-        "notFound": "No Complains found"
+        "createOrEditLabel": "Tuma Lalamiko",
+        "notFound": "No Complains found",
+        "optionalMessageLabel": "Chagua chaguo moja au zaidi",
+        "complainant": "Taarifa binafsi za mlalamikaji",
+        "suspect": "Taarifa za mlalamikiwa",
+        "witness": "Taarifa za shahidi",
+        "complain.info": "Taarifa za mlalamikaji",
+        "confirmation": "Tuma Taarifa",
+        "submit": "Tuma Lalamiko",
+        "attachment": "Kiambatanisho",
+        "next": "Mbele"
+
       },
       "created": "A new Complain is created with identifier {{ param }}",
       "updated": "A Complain is updated with identifier {{ param }}",
@@ -16,15 +26,15 @@
       "detail": {
         "title": "Complain"
       },
-      "name": "Name",
-      "position": "Position",
-      "organisation": "Organisation",
-      "email": "Email",
-      "phoneNumber": "Phone Number",
+      "name": "Jina",
+      "position": "Cheo",
+      "organisation": "Taasisi",
+      "email": "Barua Pepe",
+      "phoneNumber": "Namba ya simu",
       "controlNumber": "Control Number",
       "description": "Description",
-      "witnesses": "Witnesses",
-      "suspects": "Suspects",
+      "witnesses": "Ongeza shahidi",
+      "suspects": "Ongeza mlalamikiwa",
       "attachments": "Attachments",
       "category": "Category",
       "receivers": "Receivers"

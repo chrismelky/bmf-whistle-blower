@@ -9,16 +9,17 @@
         <br />
         <div fxLayout="column" style="margin-left: 24px;" fxLayoutGap="8px">
             <mat-label>
-                <span style="font-weight:bold">Optionally select below information</span>
+                <span style="font-weight:bold" jhiTranslate="whistleBlowerApp.complain.home.optionalMessageLabel"></span>
             </mat-label>
             <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.md="column">
                 <mat-checkbox [(ngModel)]="hasPerson" color="primary" style="margin-left: 4px;">
-                    Complainant Personal Information                </mat-checkbox>
+                    <span jhiTranslate="whistleBlowerApp.complain.home.complainant"></span>
+                </mat-checkbox>
                 <mat-checkbox [(ngModel)]="hasSuspect" color="primary" style="margin-left: 4px;">
-                    Suspect Information
+                    <span jhiTranslate="whistleBlowerApp.complain.home.suspect"></span>
                 </mat-checkbox>
                 <mat-checkbox [(ngModel)]="hasWitness" color="primary" style="margin-left: 4px;">
-                    Witness Information
+                    <span jhiTranslate="whistleBlowerApp.complain.home.witness"></span>
                 </mat-checkbox>
             </div>
         </div>
@@ -63,7 +64,7 @@
                                         <button (click)="openAttachementDialog()" color="primary" type="button"
                                             mat-button>
                                             <mat-icon color="primary">add</mat-icon>
-                                            <span>Add Attachment</span>
+                                            <span jhiTranslate="whistleBlowerApp.complain.home.attachment"></span>
                                         </button>
                                     </div>
                                     <mat-list-item formArrayName="attachments"
@@ -83,11 +84,16 @@
                         </div>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 10px;">
-                        <button type="button" color="primary" mat-raised-button matStepperNext>Next</button>
+                        <button type="button" color="primary" mat-raised-button matStepperNext>Next
+                            <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
+                        </button>
                     </div>
                 </mat-step>
                 <mat-step *ngIf="hasPerson">
-                    <ng-template matStepLabel>Complainant Personal Information</ng-template>
+                    <ng-template matStepLabel>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.complainant"></span>
+
+                    </ng-template>
                     <div fxLayout="column">
                         <div fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field fxFlex appearance="outline">
@@ -131,7 +137,9 @@
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="suspects" *ngIf="hasSuspect">
-                    <ng-template matStepLabel>Suspects</ng-template>
+                    <ng-template matStepLabel>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.suspect"></span>
+                    </ng-template>
                     <button type="button" mat-button (click)="addSuspect()" color="primary"
                         style="margin-bottom: 20px;">
                         <mat-icon color="primary">add</mat-icon>
@@ -183,7 +191,9 @@
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="witnesses" *ngIf="hasWitness">
-                    <ng-template matStepLabel>Witnesses</ng-template>
+                    <ng-template matStepLabel>Witnesses
+                        <span jhiTranslate="whistleBlowerApp.complain.home.witness"></span>
+                    </ng-template>
                     <button type="button" color="primary" mat-button (click)="addWitness()"
                         style="margin-bottom: 20px;">
                         <mat-icon>add</mat-icon>
@@ -256,7 +266,10 @@
             </mat-horizontal-stepper>
             <mat-vertical-stepper [linear]="true" #stepper fxShow fxHide.gt-md="true">
                 <mat-step [stepControl]="complainForm.get('categoryId')! && complainForm.get('description')!">
-                    <ng-template matStepLabel>Complain Information</ng-template>
+                    <ng-template matStepLabel>
+                        <span  jhiTranslate="whistleBlowerApp.complain.home.complain.info"></span>
+
+                    </ng-template>
                     <div fxLayout="row">
                         <div fxFlex fxLayout="column">
                             <mat-form-field class="full-width" appearance="outline">
@@ -317,7 +330,9 @@
                     </div>
                 </mat-step>
                 <mat-step *ngIf="hasPerson">
-                    <ng-template matStepLabel>Personal Information</ng-template>
+                    <ng-template matStepLabel>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.complainant"></span>
+                    </ng-template>
                     <div fxLayout="column">
                         <div fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field fxFlex appearance="outline">
@@ -361,7 +376,10 @@
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="suspects" *ngIf="hasSuspect">
-                    <ng-template matStepLabel>Suspects</ng-template>
+                    <ng-template matStepLabel>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.suspect"></span>
+
+                    </ng-template>
                     <button type="button" mat-button (click)="addSuspect()" color="primary"
                         style="margin-bottom: 20px;">
                         <mat-icon color="primary">add</mat-icon>
@@ -413,7 +431,10 @@
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="witnesses" *ngIf="hasWitness">
-                    <ng-template matStepLabel>Witnesses</ng-template>
+                    <ng-template matStepLabel>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.witness"></span>
+
+                    </ng-template>
                     <button type="button" color="primary" mat-button (click)="addWitness()"
                         style="margin-bottom: 20px;">
                         <mat-icon>add</mat-icon>
@@ -465,7 +486,10 @@
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="complainForm.get('receivers')!">
-                    <ng-template matStepLabel>Confirmation</ng-template>
+                    <ng-template matStepLabel>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.confirmation"></span>
+
+                        </ng-template>
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>
@@ -479,7 +503,9 @@
                         </mat-form-field>
                         <button type="submit" mat-raised-button color="primary"
                             [disabled]="complainForm.invalid || isSaving">
-                            <mat-icon>save</mat-icon>&nbsp;<span>Submit</span>
+                            <mat-icon>save</mat-icon>&nbsp;<span>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.submit"></span>
+                        </span>
                         </button>
                     </div>
                 </mat-step>
