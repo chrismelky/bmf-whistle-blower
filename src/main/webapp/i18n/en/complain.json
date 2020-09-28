@@ -16,7 +16,8 @@
         "attachment": "Add attachment",
         "add.suspect": "Add Suspect",
         "next": "Next",
-        "back": "Nyuma"
+        "back": "Nyuma",
+        "receiver": "receiver"
 
       },
       "created": "A new Complain is created with identifier {{ param }}",

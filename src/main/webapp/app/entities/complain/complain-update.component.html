@@ -101,19 +101,19 @@
                         <div fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.name">Name</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.name"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="name" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="position" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.organisation"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="organisation" />
                             </mat-form-field>
@@ -121,13 +121,13 @@
                         <div fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="email" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="phoneNumber" />
                             </mat-form-field>
@@ -135,7 +135,9 @@
 
                     </div>
                     <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
-                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
+                        <button type="button" mat-raised-button matStepperPrevious>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.back"></span>
+                        </button>
                         <button type="button" color="primary" mat-raised-button matStepperNext>
                             <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
 
@@ -165,25 +167,25 @@
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position"></span>
                                 </mat-label>
                                 <input matInput formControlName="position" />
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>
-                                    <span jjhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                    <span jjhiTranslate="whistleBlowerApp.complain.organisation"></span>
                                 </mat-label>
                                 <input matInput formControlName="organisation" />
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email"></span>
                                 </mat-label>
                                 <input matInput formControlName="email" />
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber"></span>
                                 </mat-label>
                                 <input matInput formControlName="phoneNumber" />
                             </mat-form-field>
@@ -208,7 +210,7 @@
                     <button type="button" color="primary" mat-button (click)="addWitness()"
                         style="margin-bottom: 20px;">
                         <mat-icon>add</mat-icon>
-                        <span jhiTranslate="whistleBlowerApp.complain.witness"></span>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.witness"></span>
                     </button>
                     <div formArrayName="witnesses" *ngFor="let s of witnesses.controls; let i= index">
                         <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -223,25 +225,25 @@
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position"></span>
                                 </mat-label>
                                 <input matInput formControlName="position" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.organisation"></span>
                                 </mat-label>
                                 <input matInput formControlName="organisation" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email"></span>
                                 </mat-label>
                                 <input matInput formControlName="email" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber"></span>
                                 </mat-label>
                                 <input matInput formControlName="phoneNumber" />
                             </mat-form-field>
@@ -251,18 +253,24 @@
                         </div>
                     </div>
                     <div fxLayout='row' fxLayoutGap="10px" fxLayoutAlign="end">
-                        <button type="button" mat-raised-button matStepperPrevious>Back</button>
+                        <button type="button" mat-raised-button matStepperPrevious>
+                            <span jhiTranslate="whistleBlowerApp.complain.home.back"></span>
+                        </button>
                         <button type="button" color="primary" mat-raised-button matStepperNext>
                             <span jhiTranslate="whistleBlowerApp.complain.home.next"></span>
                         </button>
                     </div>
                 </mat-step>
                 <mat-step [stepControl]="complainForm.get('receivers')!">
-                    <ng-template matStepLabel>Confirmation</ng-template>
+                    <ng-template matStepLabel>
+                        <span  jhiTranslate="whistleBlowerApp.complain.home.confirmation"></span>
+                    </ng-template>
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>
-                                Receiver
+
+                                <span  jhiTranslate="whistleBlowerApp.complain.home.receiver"></span>
+
                             </mat-label>
                             <mat-select formControlName="receivers" multiple>
                                 <mat-option *ngFor="let r of users" [value]="r">
@@ -272,7 +280,8 @@
                         </mat-form-field>
                         <button type="submit" mat-raised-button color="primary"
                             [disabled]="complainForm.invalid || isSaving">
-                            <mat-icon>save</mat-icon>&nbsp;<span>Submit</span>
+                            <mat-icon>save</mat-icon>&nbsp;
+                            <span  jhiTranslate="whistleBlowerApp.complain.home.submit"></span>
                         </button>
                     </div>
                 </mat-step>
@@ -359,13 +368,13 @@
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="position" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.organisation"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="organisation" />
                             </mat-form-field>
@@ -373,13 +382,13 @@
                         <div fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="email" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber"></span>
                                 </mat-label>
                                 <input matInput type="text" formControlName="phoneNumber" />
                             </mat-form-field>
@@ -420,25 +429,25 @@
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position"></span>
                                 </mat-label>
                                 <input matInput formControlName="position" />
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>
-                                    <span jjhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                    <span jjhiTranslate="whistleBlowerApp.complain.organisation"></span>
                                 </mat-label>
                                 <input matInput formControlName="organisation" />
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email"></span>
                                 </mat-label>
                                 <input matInput formControlName="email" />
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber"></span>
                                 </mat-label>
                                 <input matInput formControlName="phoneNumber" />
                             </mat-form-field>
@@ -466,7 +475,7 @@
                     <button type="button" color="primary" mat-button (click)="addWitness()"
                         style="margin-bottom: 20px;">
                         <mat-icon>add</mat-icon>
-                        <span jhiTranslate="whistleBlowerApp.complain.witness"></span>
+                        <span jhiTranslate="whistleBlowerApp.complain.home.witness"></span>
                     </button>
                     <div formArrayName="witnesses" *ngFor="let s of witnesses.controls; let i= index">
                         <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -481,25 +490,25 @@
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.position">Position</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.position"></span>
                                 </mat-label>
                                 <input matInput formControlName="position" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.organisation">Organisation</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.organisation"></span>
                                 </mat-label>
                                 <input matInput formControlName="organisation" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.email">Email</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.email"></span>
                                 </mat-label>
                                 <input matInput formControlName="email" />
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="outline">
                                 <mat-label>
-                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber">Phone Number</span>
+                                    <span jhiTranslate="whistleBlowerApp.complain.phoneNumber"></span>
                                 </mat-label>
                                 <input matInput formControlName="phoneNumber" />
                             </mat-form-field>
@@ -527,7 +536,7 @@
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>
-                                Receiver
+                                <span jhiTranslate="whistleBlowerApp.complain.home.receiver"></span>
                             </mat-label>
                             <mat-select formControlName="receivers" multiple>
                                 <mat-option *ngFor="let r of users" [value]="r">

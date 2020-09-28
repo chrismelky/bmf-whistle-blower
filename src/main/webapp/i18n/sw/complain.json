@@ -16,7 +16,8 @@
         "attachment": "Kiambatanisho",
         "next": "Mbele",
         "back": "Nyuma",
-        "add.suspect": "Ongeza Mlalamikiwa"
+        "add.suspect": "Ongeza Mlalamikiwa",
+        "receiver": "Mpokeaji"
       },
       "created": "A new Complain is created with identifier {{ param }}",
       "updated": "A Complain is updated with identifier {{ param }}",
@@ -33,7 +34,7 @@
       "email": "Barua Pepe",
       "phoneNumber": "Namba ya simu",
       "controlNumber": "Control Number",
-      "description": "Description",
+      "description": "Maelezo",
       "witnesses": "Ongeza shahidi",
       "suspects": "Ongeza mlalamikiwa",
       "attachments": "Attachments",
