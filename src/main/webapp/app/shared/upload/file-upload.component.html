@@ -1,7 +1,9 @@
 <div fxLayout="column">
   <div fxLayout="column">
     <mat-form-field *ngIf="inputName" appearance="outline" class="full-width">
-      <mat-label>Attachement name</mat-label>
+      <mat-label>
+          <span jhiTranslate="whistleBlowerApp.complain.home.attachment.name"></span>
+      </mat-label>
       <input matInput autocomplete="off"  [(ngModel)]="name" />
     </mat-form-field>
     <button type="button"
@@ -10,7 +12,7 @@
             [disabled]="name === '' || name=== undefined || name === null"
             (click)="onClick()">
       <mat-icon>file_upload</mat-icon>
-      Select file
+        <span jhiTranslate="whistleBlowerApp.complain.home.select.file"></span>
     </button>
   </div>
   <ul>

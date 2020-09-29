@@ -17,7 +17,9 @@
         "next": "Mbele",
         "back": "Nyuma",
         "add.suspect": "Ongeza Mlalamikiwa",
-        "receiver": "Mpokeaji"
+        "receiver": "Mpokeaji",
+        "attachment.name": "Jina la kiambatanisho",
+        "select.file": "Chagua faili"
       },
       "created": "A new Complain is created with identifier {{ param }}",
       "updated": "A Complain is updated with identifier {{ param }}",
